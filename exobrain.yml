@@ -8,7 +8,6 @@ spec:
   # TODO: Digest for emanote container
   # TODO: A deployment
   # TODO: Better container names
-  # TODO: Correctly serve only the contents of the cloned repo. Some emanote CLI arg?
   containers:
     - name: emanote
       image: sridca/emanote
