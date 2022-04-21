@@ -15,14 +15,20 @@ spec:
       ports:
         - containerPort: 80
       volumeMounts:
-        - name: zettelkasten
+        - name: syncdir
           mountPath: /data
       command: [ "emanote", "run", "--host=0.0.0.0", "--port=80" ]
+      livenessProbe:
+        httpGet:
+          path: /
+          port: 80
+        initialDelaySeconds: 60
+        periodSeconds: 10
     - name: emanote-sync
       image: k8s.gcr.io/git-sync:v3.1.6
       volumeMounts:
-        - name: zettelkasten
-          mountPath: /tmp/git
+        - name: syncdir
+          mountPath: /syncdir
       env:
         - name: GIT_SYNC_REPO
           value: https://github.com/huuff/exobrain.git
@@ -30,9 +36,13 @@ spec:
           value: master
         - name: GIT_SYNC_DEST
           value: zettelkasten
+        - name: GIT_SYNC_ROOT
+          value: /syncdir
   volumes:
-    - name: zettelkasten
+    - name: syncdir
       emptyDir: {}
+  nodeSelector:
+    "kubernetes.io/hostname": "worker-1"
 ---
 apiVersion: v1
 kind: Service
