@@ -16,8 +16,8 @@ spec:
         - containerPort: 80
       volumeMounts:
         - name: syncdir
-          mountPath: /data
-      command: [ "emanote", "run", "--host=0.0.0.0", "--port=80" ]
+          mountPath: /syncdir
+      command: [ "emanote", "run", "--host=0.0.0.0", "--port=80", "--layers=/syncdir/zettelkasten" ]
       livenessProbe:
         httpGet:
           path: /
