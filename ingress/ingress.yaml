@@ -7,10 +7,10 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
   name: app-ingress
 spec:
-  #tls:
-    #- hosts:
-      #- exobrain.haff.xyz
-      #secretName: exobrain-tls
+  tls:
+    - hosts:
+      - exobrain.haff.xyz
+      secretName: exobrain-tls
   rules:
   - host: exobrain.haff.xyz
     http:
