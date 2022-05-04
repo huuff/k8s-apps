@@ -6,6 +6,8 @@ metadata:
     app: exobrain
 # TODO: Digest from emanote container
 # TODO: Don't run as root
+# TODO: Resource limits
+# TODO: Helm chart
 spec:
   replicas: 1
   selector:
