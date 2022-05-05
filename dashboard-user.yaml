@@ -1,39 +1,39 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: dashboard-user
   namespace: kubernetes-dashboard
+  name: readonly-user
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
+kind: ClusterRole
 metadata:
-  name: dashboard-role
-  namespace: kubernetes-dashboard
+  name: readonly-role
 rules:
   - apiGroups: ["", "extensions", "apps"]
     resources: ["deployments", "pods", "services", "secrets", "namespaces"]
     verbs: ["get", "list", "watch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
-  name: dashboard-role-binding
+  name: readonly-role-binding
   namespace: kubernetes-dashboard
 subjects:
   - kind: ServiceAccount
-    name: dashboard-user
+    name: readonly-user
+    namespace: kubernetes-dashboard
     apiGroup: ""
 roleRef:
-  kind: Role
-  name: dashboard-role
+  kind: ClusterRole
+  name: readonly-role
   apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: v1
 kind: Secret
 metadata:
- name: dashboard-user-token
- namespace: kubernetes-dashboard
- annotations:
-   kubernetes.io/service-account.name: dashboard-user
-   kubernetes.io/service-account.namespace: kubernetes-dashboard
+  name: readonly-user-token
+  namespace: kubernetes-dashboard
+  annotations:
+    kubernetes.io/service-account.name: readonly-user
+    kubernetes.io/service-account.namespace: kubernetes-dashboard
 type: kubernetes.io/service-account-token
