@@ -10,7 +10,7 @@ metadata:
   name: readonly-role
 rules:
   - apiGroups: ["", "extensions", "apps"]
-    resources: ["deployments", "pods", "services", "secrets", "namespaces"]
+    resources: ["deployments", "pods", "services", "namespaces", "nodes", "events", "replicasets", "daemonsets"]
     verbs: ["get", "list", "watch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
