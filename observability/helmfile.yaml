@@ -1,0 +1,11 @@
+repositories:
+  - name: metrics-server
+    url: https://kubernetes-sigs.github.io/metrics-server/
+
+releases:
+  - name: metrics-server
+    namespace: observability
+    chart: metrics-server/metrics-server
+    set:
+      - name: args
+        values: [ "--kubelet-insecure-tls" ] # TODO: Fix certs
