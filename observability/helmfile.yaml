@@ -1,6 +1,8 @@
 repositories:
   - name: metrics-server
     url: https://kubernetes-sigs.github.io/metrics-server/
+  - name: kubernetes-dashboard
+    url: https://kubernetes.github.io/dashboard/
 
 releases:
   - name: metrics-server
@@ -9,3 +11,9 @@ releases:
     set:
       - name: args
         values: [ "--kubelet-insecure-tls" ] # TODO: Fix certs
+  - name: kubernetes-dashboard
+    namespace: observability
+    chart: kubernetes-dashboard/kubernetes-dashboard
+    set:
+      - name: metricsScraper.enabled
+        value: true
