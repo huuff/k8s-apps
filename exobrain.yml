@@ -16,7 +16,6 @@ metadata:
   name: exobrain
   labels:
     app: exobrain
-# TODO: Don't run as root
 # TODO: Resource limits
 # TODO: Helm chart
 spec:
@@ -67,10 +66,13 @@ spec:
           env:
             - name: GIT_SYNC_ONE_TIME
               value: "true"
-
       volumes:
         - name: syncdir
           emptyDir: {}
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
 ---
 apiVersion: v1
 kind: Service
