@@ -3,6 +3,8 @@ kind: ClusterRoleBinding
 metadata:
   name: readonly-role-binding
   namespace: {{ .Release.Namespace }}
+  labels:
+    "haff.xyz/component": "observability-service-account"
 subjects:
   - kind: ServiceAccount
     name: {{ .Values.accountName }}
