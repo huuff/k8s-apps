@@ -2,11 +2,11 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: readonly-role-binding
-  namespace: observability
+  namespace: {{ .Release.Namespace }}
 subjects:
   - kind: ServiceAccount
     name: {{ .Values.accountName }}
-    namespace: observability
+    namespace: {{ .Release.Namespace }}
     apiGroup: ""
 roleRef:
   kind: ClusterRole

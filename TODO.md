@@ -5,5 +5,4 @@
 * Try to set a load balancer for all nodes so I can point my subdomains there
 
 ## Observability service account chart
-* Pass namespace as a value
 * Pass role name as value
