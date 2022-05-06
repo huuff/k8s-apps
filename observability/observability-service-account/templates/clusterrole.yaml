@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: readonly-role
+  name: {{ .Values.roleName }}
 rules:
   - apiGroups: ["", "extensions", "apps"]
     resources: ["deployments", "pods", "services", "namespaces", "nodes", "events", "replicasets", "daemonsets"]

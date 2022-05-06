@@ -1,1 +1,3 @@
 accountName: "readonly-user"
+roleName: "readonly-role"
+secretName: "readonly-user-token"

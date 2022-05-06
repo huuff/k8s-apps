@@ -3,8 +3,6 @@ repositories:
     url: https://kubernetes-sigs.github.io/metrics-server/
   - name: kubernetes-dashboard
     url: https://kubernetes.github.io/dashboard/
-  - name: incubator
-    url: https://charts.helm.sh/incubator
 
 releases:
   - name: metrics-server

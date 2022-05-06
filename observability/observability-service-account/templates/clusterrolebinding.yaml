@@ -10,5 +10,5 @@ subjects:
     apiGroup: ""
 roleRef:
   kind: ClusterRole
-  name: readonly-role
+  name: {{ .Values.roleName }}
   apiGroup: rbac.authorization.k8s.io
