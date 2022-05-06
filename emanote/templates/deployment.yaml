@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+  labels:
+    app: {{ .Values.name }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      containers:
+        - name: emanote
+          image: sridca/emanote@{{ .Values.digest }}
+          ports:
+            - containerPort: {{ .Values.port }}
+          volumeMounts:
+            - name: syncdir
+              mountPath: /syncdir
+          command:
+            - "emanote"
+            - "run"
+            - "--host=0.0.0.0"
+            - "--port={{ .Values.port }}"
+            - "--layers=/syncdir/zettelkasten"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.port }}
+            # TODO: As values
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            # TODO: As values
+          resources:
+            requests:
+              cpu: "30m"
+              memory: "100Mi"
+            limits:
+              cpu: "30m"
+              memory: "100Mi"
+        - name: git-sync
+          image: k8s.gcr.io/git-sync:v3.1.6
+          volumeMounts:
+            - name: syncdir
+              mountPath: /syncdir
+          env:
+            - name: GIT_SYNC_WAIT
+              value: {{ .Values.git.refreshPeriod | quote }}
+            - name: GIT_SYNC_REPO
+              value: {{ .Values.git.repo }}
+            - name: GIT_SYNC_BRANCH
+              value: {{ .Values.git.branch }}
+            - name: GIT_SYNC_DEST
+              value: zettelkasten
+            - name: GIT_SYNC_ROOT
+              value: /syncdir
+      initContainers:
+        - name: git-init-sync
+          image: k8s.gcr.io/git-sync:v3.1.6
+          volumeMounts:
+            - name: syncdir
+              mountPath: /syncdir
+          env:
+            - name: GIT_SYNC_REPO
+              value: {{ .Values.git.repo }}
+            - name: GIT_SYNC_BRANCH
+              value: {{ .Values.git.branch }}
+            - name: GIT_SYNC_ROOT
+              value: /syncdir
+            - name: GIT_SYNC_DEST
+              value: zettelkasten
+            - name: GIT_SYNC_ONE_TIME
+              value: "true"
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+      volumes:
+        - name: syncdir
+          emptyDir: {}

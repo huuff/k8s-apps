@@ -1,0 +1,17 @@
+releases:
+  - name: exobrain
+    namespace: default
+    chart: ./emanote
+    set:
+      - name: name
+        value: exobrain
+      - name: git.repo
+        value: https://github.com/huuff/exobrain.git
+      - name: git.refreshPeriod
+        value: "300"
+      - name: tls.clusterIssuer
+        value: "letsencrypt-prod"
+      - name: tls.secretName
+        value: "exobrain-tls"
+      - name: ingress.host
+        value: "exobrain.haff.xyz"
