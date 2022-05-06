@@ -16,7 +16,6 @@ metadata:
   name: exobrain
   labels:
     app: exobrain
-# TODO: Resource limits
 # TODO: Helm chart
 spec:
   replicas: 1
@@ -43,6 +42,13 @@ spec:
               port: 8080
             initialDelaySeconds: 60
             periodSeconds: 10
+          resources:
+            requests:
+              cpu: "30m"
+              memory: "100Mi"
+            limits:
+              cpu: "30m"
+              memory: "100Mi"
         - name: git-sync
           image: k8s.gcr.io/git-sync:v3.1.6
           volumeMounts:
@@ -54,6 +60,13 @@ spec:
           env:
             - name: GIT_SYNC_WAIT
               value: "300"
+          resources:
+            requests:
+              cpu: "5m"
+              memory: "10Mi"
+            limits:
+              cpu: "5m"
+              memory: "10Mi"
       initContainers:
         - name: git-init-sync
           image: k8s.gcr.io/git-sync:v3.1.6
