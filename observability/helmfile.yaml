@@ -19,44 +19,6 @@ releases:
     set:
       - name: metricsScraper.enabled
         value: true
-  - name: readonly-user
+  - name: observability-user
     namespace: observability
-    chart: incubator/raw
-    values:
-      - resources:
-        - apiVersion: v1
-          kind: ServiceAccount
-          metadata:
-            namespace: observability
-            name: readonly-user
-        - apiVersion: rbac.authorization.k8s.io/v1
-          kind: ClusterRole
-          metadata:
-            name: readonly-role
-          rules:
-            - apiGroups: ["", "extensions", "apps"]
-              resources: ["deployments", "pods", "services", "namespaces", "nodes", "events", "replicasets", "daemonsets"]
-              verbs: ["get", "list", "watch"]
-        - apiVersion: rbac.authorization.k8s.io/v1
-          kind: ClusterRoleBinding
-          metadata:
-            name: readonly-role-binding
-            namespace: observability
-          subjects:
-            - kind: ServiceAccount
-              name: readonly-user
-              namespace: observability
-              apiGroup: ""
-          roleRef:
-            kind: ClusterRole
-            name: readonly-role
-            apiGroup: rbac.authorization.k8s.io
-        - apiVersion: v1
-          kind: Secret
-          metadata:
-            name: readonly-user-token
-            namespace: observability
-            annotations:
-              kubernetes.io/service-account.name: readonly-user
-              kubernetes.io/service-account.namespace: observability
-          type: kubernetes.io/service-account-token
+    chart: ./observability-service-account
