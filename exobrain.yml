@@ -56,6 +56,19 @@ spec:
           env:
             - name: GIT_SYNC_WAIT
               value: "300"
+      initContainers:
+        - name: git-init-sync
+          image: k8s.gcr.io/git-sync:v3.1.6
+          volumeMounts:
+            - name: syncdir
+              mountPath: /syncdir
+          envFrom:
+            - configMapRef:
+                name: exobrain-git-sync-conf
+          env:
+            - name: GIT_SYNC_ONE_TIME
+              value: "true"
+
       volumes:
         - name: syncdir
           emptyDir: {}
