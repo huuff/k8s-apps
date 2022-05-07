@@ -5,9 +5,9 @@ releases:
     set:
       - name: name
         value: exobrain
-      - name: git.repo
+      - name: gitSync.repo
         value: https://github.com/huuff/exobrain.git
-      - name: git.refreshPeriod
+      - name: gitSync.refreshPeriod
         value: "300"
       - name: tls.clusterIssuer
         value: "letsencrypt-prod"

@@ -16,7 +16,6 @@ emanote:
     periodSeconds: 10
 gitSync:
   version: 3.1.6
-git:
   repo: ""
   branch: master
   refreshPeriod: "60"

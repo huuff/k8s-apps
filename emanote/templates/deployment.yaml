@@ -45,17 +45,17 @@ spec:
               mountPath: /syncdir
           env:
             - name: GIT_SYNC_WAIT
-              value: {{ .Values.git.refreshPeriod | quote }}
+              value: {{ .Values.gitSync.refreshPeriod | quote }}
             - name: GIT_SYNC_REPO
-              value: {{ .Values.git.repo }}
+              value: {{ .Values.gitSync.repo }}
             - name: GIT_SYNC_BRANCH
-              value: {{ .Values.git.branch }}
+              value: {{ .Values.gitSync.branch }}
             - name: GIT_SYNC_DEST
               value: zettelkasten
             - name: GIT_SYNC_ROOT
               value: /syncdir
           resources:
-            {{- toYaml .Values.git.resources | nindent 12 }}
+            {{- toYaml .Values.gitSync.resources | nindent 12 }}
 
       initContainers:
         - name: git-init-sync
@@ -65,9 +65,9 @@ spec:
               mountPath: /syncdir
           env:
             - name: GIT_SYNC_REPO
-              value: {{ .Values.git.repo }}
+              value: {{ .Values.gitSync.repo }}
             - name: GIT_SYNC_BRANCH
-              value: {{ .Values.git.branch }}
+              value: {{ .Values.gitSync.branch }}
             - name: GIT_SYNC_ROOT
               value: /syncdir
             - name: GIT_SYNC_DEST
