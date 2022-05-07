@@ -28,6 +28,7 @@ spec:
             - "--host=0.0.0.0"
             - "--port={{ .Values.port }}"
             - "--layers=/syncdir/zettelkasten"
+            - "--verbose"
           livenessProbe:
             httpGet:
               path: /
@@ -59,6 +60,13 @@ spec:
               value: zettelkasten
             - name: GIT_SYNC_ROOT
               value: /syncdir
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "20Mi"
+            limits:
+              cpu: "10m"
+              memory: "20Mi"
       initContainers:
         - name: git-init-sync
           image: k8s.gcr.io/git-sync:v3.1.6
