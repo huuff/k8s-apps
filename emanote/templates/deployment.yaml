@@ -16,9 +16,9 @@ spec:
     spec:
       containers:
         - name: emanote
-          image: sridca/emanote@{{ .Values.digest }}
+          image: sridca/emanote@{{ .Values.emanote.digest }}
           ports:
-            - containerPort: {{ .Values.port }}
+            - containerPort: {{ .Values.emanote.port }}
           volumeMounts:
             - name: syncdir
               mountPath: /syncdir
@@ -26,24 +26,19 @@ spec:
             - "emanote"
             - "run"
             - "--host=0.0.0.0"
-            - "--port={{ .Values.port }}"
+            - "--port={{ .Values.emanote.port }}"
             - "--layers=/syncdir/zettelkasten"
             - "--verbose"
           livenessProbe:
             httpGet:
               path: /
-              port: {{ .Values.port }}
+              port: {{ .Values.emanote.port }}
             # TODO: As values
             initialDelaySeconds: 60
             periodSeconds: 10
-            # TODO: As values
           resources:
-            requests:
-              cpu: "30m"
-              memory: "100Mi"
-            limits:
-              cpu: "500m"
-              memory: "200Mi"
+            {{- toYaml .Values.emanote.resources | nindent 12 }}
+          # TODO: Whole git-sync container as a helper function
         - name: git-sync
           image: k8s.gcr.io/git-sync:v3.1.6
           volumeMounts:
@@ -61,14 +56,11 @@ spec:
             - name: GIT_SYNC_ROOT
               value: /syncdir
           resources:
-            requests:
-              cpu: "10m"
-              memory: "20Mi"
-            limits:
-              cpu: "10m"
-              memory: "20Mi"
+            {{- toYaml .Values.git.resources | nindent 12 }}
+
       initContainers:
         - name: git-init-sync
+          # TODO: configurable version
           image: k8s.gcr.io/git-sync:v3.1.6
           volumeMounts:
             - name: syncdir
@@ -84,6 +76,7 @@ spec:
               value: zettelkasten
             - name: GIT_SYNC_ONE_TIME
               value: "true"
+      # TODO: In values
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000

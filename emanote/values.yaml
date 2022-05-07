@@ -1,7 +1,25 @@
+emanote:
+  digest: "sha256:97cf33f0caa2295ed3bd6abbb7c6a52f83d58f40bef75402337f0ed92aa34d3c"
+  port: "8080"
+  resources:
+    requests:
+      cpu: "30m"
+      memory: "100Mi"
+    limits:
+      cpu: "500m"
+      memory: "200Mi"
+# TODO: call it git-sync
 git:
   repo: ""
   branch: master
   refreshPeriod: "60"
+  resources:
+    requests:
+      cpu: "10m"
+      memory: "20Mi"
+    limits:
+      cpu: "10m"
+      memory: "20Mi"
 tls:
   clusterIssuer: ""
   secretName: ""
@@ -9,7 +27,6 @@ ingress:
   class: "nginx"
   host: ""
 
+
 name: "zettelkasten"
 replicas: 1
-digest: "sha256:97cf33f0caa2295ed3bd6abbb7c6a52f83d58f40bef75402337f0ed92aa34d3c"
-port: "8080"

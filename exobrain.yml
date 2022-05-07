@@ -16,7 +16,6 @@ metadata:
   name: exobrain
   labels:
     app: exobrain
-# TODO: Helm chart
 spec:
   replicas: 1
   selector:
