@@ -42,13 +42,6 @@ spec:
               port: 8080
             initialDelaySeconds: 60
             periodSeconds: 10
-          resources:
-            requests:
-              cpu: "30m"
-              memory: "100Mi"
-            limits:
-              cpu: "30m"
-              memory: "100Mi"
         - name: git-sync
           image: k8s.gcr.io/git-sync:v3.1.6
           volumeMounts:
