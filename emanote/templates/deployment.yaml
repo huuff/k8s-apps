@@ -33,9 +33,8 @@ spec:
             httpGet:
               path: /
               port: {{ .Values.emanote.port }}
-            # TODO: As values
-            initialDelaySeconds: 60
-            periodSeconds: 10
+            initialDelaySeconds: {{ .Values.emanote.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.emanote.livenessProbe.periodSeconds }}
           resources:
             {{- toYaml .Values.emanote.resources | nindent 12 }}
           # TODO: Whole git-sync container as a helper function

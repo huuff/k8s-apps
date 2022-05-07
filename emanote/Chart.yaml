@@ -4,5 +4,4 @@ description: Your personal zettelkasten with emanote
 
 type: application
 version: 0.0.1
-# TODO: Actual emanote version here
 appVersion: "0.6.5.4"
