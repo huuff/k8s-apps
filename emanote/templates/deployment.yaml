@@ -15,6 +15,28 @@ spec:
         app: {{ .Values.name }}
     spec:
       containers:
+        - name: git-sync
+          image: "k8s.gcr.io/git-sync:v{{ .Values.gitSync.version }}"
+          volumeMounts:
+            - name: syncdir
+              mountPath: /syncdir
+          env:
+            - name: GIT_SYNC_WAIT
+              value: {{ .Values.gitSync.refreshPeriod | quote }}
+            - name: GIT_SYNC_REPO
+              value: {{ .Values.gitSync.repo }}
+            - name: GIT_SYNC_BRANCH
+              value: {{ .Values.gitSync.branch }}
+            - name: GIT_SYNC_DEST
+              value: zettelkasten
+            - name: GIT_SYNC_ROOT
+              value: /syncdir
+          resources:
+            {{- toYaml .Values.gitSync.resources | nindent 12 }}
+          lifecycle:
+            postStart:
+              exec:
+                command: [ "sleep", {{.Values.emanote.waitBeforeStart | quote }} ]
         - name: emanote
           image: sridca/emanote@{{ .Values.emanote.digest }}
           ports:
@@ -37,43 +59,6 @@ spec:
             periodSeconds: {{ .Values.emanote.livenessProbe.periodSeconds }}
           resources:
             {{- toYaml .Values.emanote.resources | nindent 12 }}
-          # TODO: Whole git-sync container as a helper function
-        - name: git-sync
-          image: "k8s.gcr.io/git-sync:v{{ .Values.gitSync.version }}"
-          volumeMounts:
-            - name: syncdir
-              mountPath: /syncdir
-          env:
-            - name: GIT_SYNC_WAIT
-              value: {{ .Values.gitSync.refreshPeriod | quote }}
-            - name: GIT_SYNC_REPO
-              value: {{ .Values.gitSync.repo }}
-            - name: GIT_SYNC_BRANCH
-              value: {{ .Values.gitSync.branch }}
-            - name: GIT_SYNC_DEST
-              value: zettelkasten
-            - name: GIT_SYNC_ROOT
-              value: /syncdir
-          resources:
-            {{- toYaml .Values.gitSync.resources | nindent 12 }}
-
-      initContainers:
-        - name: git-init-sync
-          image: "k8s.gcr.io/git-sync:v{{ .Values.gitSync.version }}"
-          volumeMounts:
-            - name: syncdir
-              mountPath: /syncdir
-          env:
-            - name: GIT_SYNC_REPO
-              value: {{ .Values.gitSync.repo }}
-            - name: GIT_SYNC_BRANCH
-              value: {{ .Values.gitSync.branch }}
-            - name: GIT_SYNC_ROOT
-              value: /syncdir
-            - name: GIT_SYNC_DEST
-              value: zettelkasten
-            - name: GIT_SYNC_ONE_TIME
-              value: "true"
       securityContext:
         runAsNonRoot: true
         runAsUser: {{ .Values.securityContext.user }}

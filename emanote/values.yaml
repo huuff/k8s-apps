@@ -4,6 +4,7 @@ replicas: 1
 emanote:
   digest: "sha256:97cf33f0caa2295ed3bd6abbb7c6a52f83d58f40bef75402337f0ed92aa34d3c"
   port: "8080"
+  waitBeforeStart: "120"
   resources:
     requests:
       cpu: "30m"
