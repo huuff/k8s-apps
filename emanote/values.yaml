@@ -1,3 +1,6 @@
+name: "zettelkasten"
+replicas: 1
+
 emanote:
   digest: "sha256:97cf33f0caa2295ed3bd6abbb7c6a52f83d58f40bef75402337f0ed92aa34d3c"
   port: "8080"
@@ -31,7 +34,6 @@ tls:
 ingress:
   class: "nginx"
   host: ""
-
-
-name: "zettelkasten"
-replicas: 1
+securityContext:
+  user: 1000
+  group: 1000
