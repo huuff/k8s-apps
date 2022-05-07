@@ -39,7 +39,7 @@ spec:
             {{- toYaml .Values.emanote.resources | nindent 12 }}
           # TODO: Whole git-sync container as a helper function
         - name: git-sync
-          image: k8s.gcr.io/git-sync:v3.1.6
+          image: "k8s.gcr.io/git-sync:v{{ .Values.gitSync.version }}"
           volumeMounts:
             - name: syncdir
               mountPath: /syncdir
@@ -59,8 +59,7 @@ spec:
 
       initContainers:
         - name: git-init-sync
-          # TODO: configurable version
-          image: k8s.gcr.io/git-sync:v3.1.6
+          image: "k8s.gcr.io/git-sync:v{{ .Values.gitSync.version }}"
           volumeMounts:
             - name: syncdir
               mountPath: /syncdir

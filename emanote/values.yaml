@@ -14,9 +14,8 @@ emanote:
   livenessProbe:
     initialDelaySeconds: 60
     periodSeconds: 10
-git-sync:
+gitSync:
   version: 3.1.6
-# TODO: put it on git-sync
 git:
   repo: ""
   branch: master
