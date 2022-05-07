@@ -30,6 +30,7 @@ tls:
   clusterIssuer: ""
   secretName: ""
 ingress:
+  enabled: true
   class: "nginx"
   host: ""
 securityContext:
