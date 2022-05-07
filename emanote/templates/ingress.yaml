@@ -1,20 +1,23 @@
-# TODO: Configurable whether you want TLS
 {{- if .Values.ingress.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
+    {{- if .Values.tls.enabled }}
     cert-manager.io/cluster-issuer: {{ .Values.tls.clusterIssuer }}
+    {{- end }}
     kubernetes.io/ingress.class: {{ .Values.ingress.class }}
     {{- if eq .Values.ingress.class "nginx" }}
       {{- nindent 4 "nginx.ingress.kubernetes.io/rewrite-target: /" -}}
     {{- end }}
   name: {{ .Values.name }}
 spec:
+    {{- if .Values.tls.enabled }}
   tls:
     - hosts:
       - {{ .Values.ingress.host }}
       secretName: {{ .Values.tls.secretName }}
+    {{- end }}
   rules:
     - host: {{ .Values.ingress.host }}
       http:
