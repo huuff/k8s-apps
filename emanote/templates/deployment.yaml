@@ -31,6 +31,8 @@ spec:
               value: zettelkasten
             - name: GIT_SYNC_ROOT
               value: /syncdir
+          securityContext:
+            readOnlyRootFilesystem: true
           resources:
             {{- toYaml .Values.gitSync.resources | nindent 12 }}
           lifecycle:
@@ -44,6 +46,7 @@ spec:
           volumeMounts:
             - name: syncdir
               mountPath: /syncdir
+              readOnly: true
           command:
             - "emanote"
             - "run"
@@ -59,6 +62,8 @@ spec:
             periodSeconds: {{ .Values.emanote.livenessProbe.periodSeconds }}
           resources:
             {{- toYaml .Values.emanote.resources | nindent 12 }}
+          securityContext:
+            readOnlyRootFilesystem: true
       securityContext:
         runAsNonRoot: true
         runAsUser: {{ .Values.securityContext.user }}
