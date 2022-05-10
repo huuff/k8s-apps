@@ -5,4 +5,4 @@
 * `emanote`: No new privileges
 * Don't mount serviceaccounts!
 * A pod that monitors a web page to ensure it won't change
-
+* An ingress for `keys`
