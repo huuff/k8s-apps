@@ -1,3 +1,6 @@
+# TODO: Try to add some readonliness
+# TODO: Try to make it run as non-root
+# TODO: As chart
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -48,9 +51,30 @@ spec:
             - name: nginx-conf
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
-              readOnly: true
-            - name: ssh-keys
+            - name: www-root
               mountPath: /www/keys
+        - name: indexer
+          image: busybox@sha256:52f431d980baa76878329b68ddb69cb124c25efa6e206d8b0bd797a828f0528e
+          volumeMounts:
+            - name: ssh-keys
+              mountPath: /keys
+            - name: www-root
+              mountPath: /www/keys
+          command:
+            - "/bin/sh"
+            - "-c"
+            - | 
+              while true; 
+              do 
+                cp /keys/* /www/keys
+                rm /www/keys/all
+                # Merge all keys
+                for key in /www/keys/*;
+                do
+                  echo "$(cat $key)" >> /www/keys/all
+                done
+                sleep 60
+              done
       volumes:
         - name: nginx-conf
           configMap:
@@ -61,3 +85,5 @@ spec:
         - name: ssh-keys
           configMap:
             name: ssh-keys
+        - name: www-root
+          emptyDir: {}
