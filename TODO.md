@@ -6,3 +6,8 @@
 * Don't mount serviceaccounts!
 * A pod that monitors a web page to ensure it won't change
 * An ingress for `keys`
+* Good, sample Kyverno policies for:
+  * Not mounting serviceaccounts
+  * Not running as root
+  * Not allowing privilege escalation
+  * Making root file system read-only

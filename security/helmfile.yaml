@@ -1,0 +1,13 @@
+repositories:
+  - name: anchore
+    url: https://charts.anchore.io
+
+releases:
+  - name: anchore-engine
+    namespace: security
+    chart: anchore/anchore-engine
+    set:
+      - name: postgresql.persistence.size
+        value: 5Gi
+      - name: postgresql.persistence.resourcePolicy
+        value: delete
