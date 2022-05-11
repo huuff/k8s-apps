@@ -11,3 +11,5 @@
   * Not running as root
   * Not allowing privilege escalation
   * Making root file system read-only
+* Anchore admission controller
+* Anchore config with helm-secrets (vault?)
