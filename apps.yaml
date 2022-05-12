@@ -15,3 +15,6 @@ releases:
         value: "exobrain-tls"
       - name: ingress.host
         value: "exobrain.haff.xyz"
+  - name: test
+    namespace: default
+    chart: ./test
