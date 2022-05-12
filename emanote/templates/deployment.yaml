@@ -33,6 +33,7 @@ spec:
               value: /syncdir
           securityContext:
             readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
           resources:
             {{- toYaml .Values.gitSync.resources | nindent 12 }}
           lifecycle:
@@ -67,6 +68,7 @@ spec:
             {{- toYaml .Values.emanote.resources | nindent 12 }}
           securityContext:
             readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
       securityContext:
         runAsNonRoot: true
         runAsUser: {{ .Values.securityContext.user }}
