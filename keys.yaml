@@ -1,4 +1,3 @@
-# TODO: Try to add some readonliness
 # TODO: Try to make it run as non-root
 # TODO: As chart
 apiVersion: v1
@@ -53,6 +52,7 @@ spec:
               subPath: nginx.conf
             - name: www-root
               mountPath: /www/keys
+              readOnly: true
         - name: indexer
           image: busybox@sha256:52f431d980baa76878329b68ddb69cb124c25efa6e206d8b0bd797a828f0528e
           volumeMounts:
@@ -67,7 +67,7 @@ spec:
               while true; 
               do 
                 cp /keys/* /www/keys
-                rm /www/keys/all
+                rm -f /www/keys/all
                 # Merge all keys
                 for key in /www/keys/*;
                 do
@@ -75,6 +75,8 @@ spec:
                 done
                 sleep 60
               done
+          securityContext:
+            readOnlyRootFilesystem: true
       automountServiceAccountToken: false
       volumes:
         - name: nginx-conf
