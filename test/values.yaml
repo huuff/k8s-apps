@@ -1,5 +1,4 @@
 label: test
-name: test
 
 resources:
   requests:

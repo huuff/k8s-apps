@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Values.name }}
+  name: {{ .Release.Name }}
   labels:
-    app: {{ .Values.label }}
+    app: {{ .Release.Name }}
 spec:
   serviceName: {{ .Values.name }}
   replicas: {{ (lookup "v1" "Node" "" "").items | len }}
