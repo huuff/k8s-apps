@@ -75,6 +75,7 @@ spec:
                 done
                 sleep 60
               done
+      automountServiceAccountToken: false
       volumes:
         - name: nginx-conf
           configMap:

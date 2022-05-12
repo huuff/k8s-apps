@@ -73,6 +73,7 @@ spec:
         runAsNonRoot: true
         runAsUser: {{ .Values.securityContext.user }}
         runAsGroup: {{ .Values.securityContext.group }}
+      automountServiceAccountToken: false
       volumes:
         - name: syncdir
           emptyDir: {}
