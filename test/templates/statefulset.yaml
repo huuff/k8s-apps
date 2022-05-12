@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.name }}
+  labels:
+    app: {{ .Values.label }}
+spec:
+  serviceName: {{ .Values.name }}
+  replicas: {{ (lookup "v1" "Node" "" "").items | len }}
+  selector:
+    matchLabels:
+      app: {{ .Values.label }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.label }}
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                      - {{ .Values.label }}
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: test
+          # TODO: digest
+          image: odise/busybox-curl
+          command: [ "sleep", {{ .Values.podDurationInSeconds | quote }} ]
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: {{ .Values.user }}
+        runAsGroup: {{ .Values.group }}
+      automountServiceAccountToken: false

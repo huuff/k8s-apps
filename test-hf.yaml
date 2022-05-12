@@ -1,0 +1,4 @@
+releases:
+  - name: test
+    namespace: default
+    chart: ./test
