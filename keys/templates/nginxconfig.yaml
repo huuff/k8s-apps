@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{.Release.Name }}-nginx-conf
+data: 
+  nginx.conf: |
+    events {}
+    http {
+      server {
+        root /www/keys;
+
+        location / {
+          autoindex on;
+        }
+      }
+    }
+

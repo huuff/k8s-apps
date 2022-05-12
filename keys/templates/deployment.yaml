@@ -1,0 +1,66 @@
+# TODO: Try to make it run as nonroot
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine@{{ .Values.nginx.digest }}
+          ports:
+            - containerPort: {{ .Values.port }}
+          volumeMounts:
+            - name: nginx-conf
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+            - name: www-root
+              mountPath: /www/keys
+              readOnly: true
+        - name: indexer
+          image: busybox@{{ .Values.indexer.digest }}
+          volumeMounts:
+            - name: ssh-keys
+              mountPath: /keys
+            - name: www-root
+              mountPath: /www/keys
+          command:
+            - "/bin/sh"
+            - "-c"
+            - | 
+              while true; 
+              do 
+                cp /keys/* /www/keys
+                rm -f /www/keys/all
+                # Merge all keys
+                for key in /www/keys/*;
+                do
+                  echo "$(cat $key)" >> /www/keys/all
+                done
+                sleep {{ .Values.indexer.secondsBetweenRefreshes }}
+              done
+          securityContext:
+            readOnlyRootFilesystem: true
+      automountServiceAccountToken: false
+      volumes:
+        - name: nginx-conf
+          configMap:
+            name: {{ .Release.Name }}-nginx-conf
+            items:
+              - key: nginx.conf
+                path: nginx.conf
+        - name: ssh-keys
+          configMap:
+            name: {{ .Release.Name }}-ssh-keys
+        - name: www-root
+          emptyDir: {}

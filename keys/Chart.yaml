@@ -1,0 +1,9 @@
+apiVersion: v2
+name: keys
+description: Easily make your public keys accessible
+
+type: application
+
+version: 0.1.0
+
+appVersion: "0.0.1"

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-ssh-keys
+data:
+  {{- range $key, $val := .Values.keys }}
+  {{ $key }}: {{ $val }}
+  {{- end -}}
