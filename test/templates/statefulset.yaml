@@ -27,8 +27,7 @@ spec:
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: test
-          # TODO: digest
-          image: odise/busybox-curl
+          image: odise/busybox-curl@sha256:46c07a8fd12ccf40056e8c82d9ccf453985ba6f370f1cf7534867cdca0479ed1
           command: [ "sleep", {{ .Values.podDurationInSeconds | quote }} ]
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
