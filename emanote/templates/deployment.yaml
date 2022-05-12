@@ -41,7 +41,7 @@ spec:
                 command: 
                   - "sh"
                   - "-c"
-                  - "until [ -e /syncdir/zettelkasten ]; do ls /syncdir/; sleep 1; done"
+                  - "until [ -e /syncdir/zettelkasten ]; do sleep 1; done"
         - name: emanote
           image: sridca/emanote@{{ .Values.emanote.digest }}
           ports:
