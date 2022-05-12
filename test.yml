@@ -1,7 +1,4 @@
 # TODO: helm chart
-# TODO: Disallow privilege escalation
-# TODO: Run as non-root
-# TODO: Readonly fs
 
 apiVersion: v1
 kind: Service
@@ -46,4 +43,18 @@ spec:
         - name: test
           image: odise/busybox-curl
           command: [ "sleep", "3600" ]
+          resources:
+            requests:
+              cpu: "15m"
+              memory: "30Mi"
+            limits:
+              cpu: "15m"
+              memory: "30Mi"
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
       automountServiceAccountToken: false
