@@ -5,6 +5,15 @@ indexer:
   digest: sha256:52f431d980baa76878329b68ddb69cb124c25efa6e206d8b0bd797a828f0528e
   secondsBetweenRefreshes: 60
 
+ingress:
+  enabled: true
+  class: "nginx"
+  host: ""
+tls:
+  enabled: true
+  secretName: ""
+  clusterIssuer: ""
+
 port: 80
 replicas: 1
 keys: {}

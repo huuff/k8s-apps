@@ -26,3 +26,9 @@ releases:
         value: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIZUhSFFTnachNf82fmzzHw0jYiry/X4Mpg+H/ogn3SK"
       - name: "keys.id_rsa"
         value: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC34ucjfwaqgPu7arMZxJv/6+hEIauiseJZJFfqfrd4Qn4kro0GWS0M9f/V7o/W2q8hCiwvz5YoHPT2NauPDpb1UTT9BGHk2q+hMioDYr5EXc+2NtPC8woxZalfABVwFLzzMBhDxUCg52OqPL1tLl4kBu4YCpKPOEN/pgTtiMPyjmMh53AueEy8CI2Qfm5ZpdEUsYL75vuU+FLb1RatkrsVT94qHbxBwrNu26aNwEQ5HNFHOYR0u1Jnt+K0ogJ7tavc36M9JfiY1GYdKA9NYlZnwesYYRhaJ59LQJY54KbdQpwHAhs54x7O6O71jrmgQiM+6Agy1eTOmdmnnEEbHiHF7wg0A39uc9t7iZ0oOcufrycnACVAjtkl67ch7VWUTZc5N6vCic27wupXAOlqYT1RxmpK/rhOEw/f0sIVtBPNv2Sd8w+SEpnYo9zHPzesKsRin+A5U6NL0NMYoIWxPHlutHzJDzK6z9N1Lez3h2hBReyVP8PPaZao4/cvS5r+2R0="
+      - name: tls.clusterIssuer
+        value: "letsencrypt-prod"
+      - name: tls.secretName
+        value: "keys-tls"
+      - name: ingress.host
+        value: "keys.haff.xyz"
