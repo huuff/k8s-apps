@@ -9,4 +9,3 @@
   * Not allowing privilege escalation
   * Making root file system read-only
 * Encrypt secrets
-* Use `.Release.Name` instead of `.Values.Name` for emanote
