@@ -1,22 +1,9 @@
 repositories:
-  - name: metrics-server
-    url: https://kubernetes-sigs.github.io/metrics-server/
-  - name: kubernetes-dashboard
-    url: https://kubernetes.github.io/dashboard/
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
 
+# TODO: Currently only using it through port-forwarding... use an ingress
 releases:
-  - name: metrics-server
+  - name: kube-prometheus
     namespace: observability
-    chart: metrics-server/metrics-server
-    set:
-      - name: args
-        values: [ "--kubelet-insecure-tls" ] # TODO: Fix certs
-  - name: kubernetes-dashboard
-    namespace: observability
-    chart: kubernetes-dashboard/kubernetes-dashboard
-    set:
-      - name: metricsScraper.enabled
-        value: true
-  - name: observability-user
-    namespace: observability
-    chart: ./observability-service-account
+    chart: prometheus-community/kube-prometheus-stack
