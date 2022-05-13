@@ -1,4 +1,5 @@
 # TODO: Try to make it run as nonroot
+# TODO: Try to make nginx readonly
 apiVersion: apps/v1
 kind: Deployment
 metadata:
