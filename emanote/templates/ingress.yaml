@@ -10,7 +10,7 @@ metadata:
     {{- if eq .Values.ingress.class "nginx" }}
       {{- nindent 4 "nginx.ingress.kubernetes.io/rewrite-target: /" -}}
     {{- end }}
-  name: {{ .Values.name }}
+  name: {{ .Release.Name }}
 spec:
     {{- if .Values.tls.enabled }}
   tls:
@@ -26,7 +26,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ .Values.name }}
+                name: {{ .Release.Name }}
                 port:
                   number: 80
 {{- end -}}
