@@ -1,0 +1,4 @@
+releases:
+  - name: kube-bench
+    chart: ./kube-bench
+    namespace: security
