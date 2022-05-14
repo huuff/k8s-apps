@@ -13,3 +13,5 @@ releases:
   - name: kyverno
     chart: kyverno/kyverno
     namespace: security
+  - name: kyverno-policies
+    chart: ./kyverno-policies
