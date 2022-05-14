@@ -9,3 +9,5 @@
   * Not allowing privilege escalation
   * Making root file system read-only
 * Encrypt secrets
+* A `kube-hunter` cronjob helm chart
+* A controller that removes pods after some time specified by a label
