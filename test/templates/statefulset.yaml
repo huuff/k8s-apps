@@ -9,11 +9,11 @@ spec:
   replicas: {{ (lookup "v1" "Node" "" "").items | len }}
   selector:
     matchLabels:
-      app: {{ .Values.label }}
+      app: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ .Values.label }}
+        app: {{ .Release.Name }}
     spec:
       affinity:
         podAntiAffinity:
@@ -23,7 +23,7 @@ spec:
                   - key: "app"
                     operator: In
                     values:
-                      - {{ .Values.label }}
+                      - {{ .Release.Name }}
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: test
