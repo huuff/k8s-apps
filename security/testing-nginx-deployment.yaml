@@ -12,6 +12,7 @@ spec:
     metadata:
       labels:
         app: nginx
+        "kyverno.haff.xyz/ignore-dont-automount-service-account-token": "yes"
     spec:
       containers:
       - name: nginx
