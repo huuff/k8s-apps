@@ -10,3 +10,4 @@
   * Making root file system read-only
 * Encrypt secrets
 * A controller that removes pods after some time specified by a label
+* Use a vertical pod autoscaler (VPA) for my apps
