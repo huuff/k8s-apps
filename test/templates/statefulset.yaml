@@ -27,12 +27,14 @@ spec:
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: test
-          image: odise/busybox-curl@sha256:46c07a8fd12ccf40056e8c82d9ccf453985ba6f370f1cf7534867cdca0479ed1
+          image: wbitt/network-multitool@{{ .Values.digest }}
           command: [ "sleep", {{ .Values.podDurationInSeconds | quote }} ]
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           securityContext:
-            allowPrivilegeEscalation: false
+            # XXX: I have to allow privilege escalation or else
+            # ping won't work. Seems like adding CAP_NET_RAW won't do it
+            allowPrivilegeEscalation: true
             readOnlyRootFilesystem: true
       securityContext:
         runAsNonRoot: true
