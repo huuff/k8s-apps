@@ -1,0 +1,26 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  schedule: {{ .Values.schedule | quote }}
+  successfulJobsHistoryLimit: {{ .Values.historyLimit }}
+  failedJobsHistoryLimit: {{ .Values.historyLimit }}
+  jobTemplate:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      template:
+        metadata:
+          labels:
+            app: {{ .Release.Name }}
+        spec:
+          containers:
+            - name: kube-hunter
+              image: aquasec/kube-hunter:{{ .Chart.AppVersion }}
+              command: ["kube-hunter"]
+              args: ["--pod"]
+          restartPolicy: Never
+
