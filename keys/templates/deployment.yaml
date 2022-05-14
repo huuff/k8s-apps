@@ -1,4 +1,3 @@
-# TODO: Try to make nginx readonly
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -27,6 +26,14 @@ spec:
             - name: www-root
               mountPath: /www/keys
               readOnly: true
+            - name: cache
+              mountPath: /var/cache/nginx
+            - name: run
+              mountPath: /var/run
+            - name: tmp
+              mountPath: /tmp
+          securityContext:
+            readOnlyRootFilesystem: true
         - name: indexer
           image: busybox@{{ .Values.indexer.digest }}
           volumeMounts:
@@ -67,4 +74,12 @@ spec:
           configMap:
             name: {{ .Release.Name }}-ssh-keys
         - name: www-root
+          emptyDir: {}
+        # XXX: the necessary read-write directories for nginx
+        # so the container can be started with a read-only root filesystem
+        - name: cache
+          emptyDir: {}
+        - name: run
+          emptyDir: {}
+        - name: tmp
           emptyDir: {}
