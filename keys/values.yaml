@@ -14,6 +14,10 @@ tls:
   secretName: ""
   clusterIssuer: ""
 
+securityContext:
+  user: 6435
+  group: 6435
+
 port: 8080
 replicas: 1
 keys: {}

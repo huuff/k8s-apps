@@ -1,4 +1,3 @@
-# TODO: Try to make it run as nonroot
 # TODO: Try to make nginx readonly
 apiVersion: apps/v1
 kind: Deployment
@@ -53,6 +52,10 @@ spec:
           securityContext:
             readOnlyRootFilesystem: true
       automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: {{ .Values.securityContext.user }}
+        runAsGroup: {{ .Values.securityContext.group }}
       volumes:
         - name: nginx-conf
           configMap:
