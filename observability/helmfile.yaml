@@ -1,9 +1,14 @@
 repositories:
   - name: prometheus-community
     url: https://prometheus-community.github.io/helm-charts
+  - name: deliveryhero
+    url: https://charts.deliveryhero.io/
 
 # TODO: Currently only using it through port-forwarding... use an ingress
 releases:
   - name: kube-prometheus
     namespace: observability
     chart: prometheus-community/kube-prometheus-stack
+  - name: node-problem-detector
+    namespace: observability
+    chart: deliveryhero/node-problem-detector
