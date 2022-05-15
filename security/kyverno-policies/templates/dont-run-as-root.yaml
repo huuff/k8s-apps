@@ -1,0 +1,23 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: dont-run-as-root
+spec:
+  validationFailureAction: enforce
+  rules:
+    - name: dont-run-as-root
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+              selector:
+                matchExpressions:
+                  - { key: "kyverno.haff.xyz/ignore-dont-run-as-root", operator: "DoesNotExist"}
+      validate:
+        message: |
+          `runAsNonRoot` should be `true`
+        pattern:
+          spec:
+            securityContext:
+              runAsNonRoot: true
