@@ -13,3 +13,4 @@
 * Encrypt secrets
 * A controller that removes pods after some time specified by a label
 * Use a vertical pod autoscaler (VPA) for my apps
+* Some AppArmor, SELinux, seccomp profiles (Is there a bane controller/operator? Can I make it?)
