@@ -23,9 +23,18 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: {{ .Values.port }}
+          {{- if eq .Values.database.dialect "sqlite"}}
           volumeMounts:
             - name: gotify-data
               mountPath: /app/data
+          {{- end }}
+          env:
+            - name: GOTIFY_DATABASE_DIALECT
+              value: {{ .Values.database.dialect }}
+          {{- if eq .Values.database.dialect "postgres"}}
+            - name: GOTIFY_DATABASE_CONNECTION
+              value: "host={{ .Values.database.host }} port={{ .Values.database.port }} user={{ .Values.user }} dbname={{ .Values.database.dbname }} password={{ .Values.database.password }}"
+          {{- end }}
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
@@ -37,6 +46,8 @@ spec:
         runAsNonRoot: true
         runAsUser: {{ .Values.user }}
         runAsGroup: {{ .Values.group }}
+      {{- if eq .Values.database.dialect "sqlite"}}
       volumes:
         - name: gotify-data
           emptyDir: {}
+      {{- end }}
