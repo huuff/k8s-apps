@@ -11,13 +11,13 @@ spec:
           - resources:
               kinds:
                 - Pod
-              selector:
-                matchExpressions:
-                  - { key: "kyverno.haff.xyz/ignore-dont-run-as-root", operator: "DoesNotExist"}
       validate:
         message: |
           `runAsNonRoot` should be `true`
         pattern:
+          metadata:
+            <(annotations):
+              "X(kyverno.haff.xyz/ignore-dont-run-as-root)": "?*"
           spec:
             securityContext:
               runAsNonRoot: true
