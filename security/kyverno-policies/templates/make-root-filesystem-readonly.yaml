@@ -1,5 +1,6 @@
-{{-  $policyName := "make-root-fs-readonly" -}}
+{{-  $policyName := "make-root-filesystem-readonly" -}}
 
+{{- if .Values.makeRootFilesystemReadonly.enabled }}
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
@@ -26,3 +27,4 @@ spec:
             containers:
               - securityContext:
                   readOnlyRootFilesystem: true
+{{- end -}}

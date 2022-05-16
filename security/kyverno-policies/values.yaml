@@ -1,2 +1,20 @@
 namespaces:
   - default
+
+alwaysPullImages:
+  enabled: true
+
+dontAllowPrivilegeEscalation:
+  enabled: true
+
+dontAutomountServiceAccountToken:
+  enabled: true
+
+dontRunAsRoot:
+  enabled: true
+
+makeRootFilesystemReadonly:
+  enabled: true
+
+requireRequestsAndLimits:
+  enabled: true

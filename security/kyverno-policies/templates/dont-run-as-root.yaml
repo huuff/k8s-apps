@@ -1,5 +1,6 @@
 {{- $policyName := "dont-run-as-root" -}}
 
+{{- if .Values.dontRunAsRoot.enabled }}
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
@@ -25,3 +26,4 @@ spec:
           spec:
             securityContext:
               runAsNonRoot: true
+{{- end -}}

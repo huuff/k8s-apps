@@ -1,5 +1,6 @@
 {{-  $policyName := "require-requests-and-limits" -}}
 
+{{- if .Values.requireRequestsAndLimits }}
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
@@ -31,4 +32,4 @@ spec:
                   limits:
                     memory: "?*"
                     cpu: "?*"
-
+{{- end -}}

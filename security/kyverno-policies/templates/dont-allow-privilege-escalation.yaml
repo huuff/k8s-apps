@@ -1,5 +1,6 @@
 {{-  $policyName := "dont-allow-privilege-escalation" -}}
 
+{{- if .Values.dontAllowPrivilegeEscalation.enabled }}
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
@@ -26,3 +27,4 @@ spec:
             containers:
               - securityContext:
                   allowPrivilegeEscalation: false
+{{- end -}}
