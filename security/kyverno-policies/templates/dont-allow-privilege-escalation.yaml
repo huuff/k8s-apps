@@ -1,11 +1,13 @@
+{{-  $policyName := "dont-allow-privilege-escalation" -}}
+
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: dont-allow-privilege-escalation
+  name: {{ $policyName }}
 spec:
   validationFailureAction: enforce
   rules:
-    - name: dont-allow-privilege-escalation
+    - name: {{ $policyName }}
       match:
         any:
           - resources:
@@ -16,7 +18,7 @@ spec:
         pattern:
           metadata:
             <(annotations):
-              "X(kyverno.haff.xyz/ignore-dont-allow-privilege-escalation)": "?*"
+              "X(kyverno.haff.xyz/ignore-{{ $policyName }})": "?*"
           spec:
             containers:
               - securityContext:
