@@ -21,6 +21,6 @@ spec:
             - name: kube-hunter
               image: aquasec/kube-hunter:{{ .Chart.AppVersion }}
               command: ["kube-hunter"]
-              args: ["--pod"]
+              args: ["--pod", "--log DEBUG", "--cidr {{ .Values.cidrRange }}"]
           restartPolicy: Never
 
