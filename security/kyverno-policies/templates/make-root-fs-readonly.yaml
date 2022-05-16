@@ -14,7 +14,9 @@ spec:
               kinds:
                 - Pod
       validate:
-        message: "`readOnlyRootFilesystem` should be `true`"
+        message: |
+          `readOnlyRootFilesystem` should be `true`.
+          If an intruder manages to compromise the container, their power to inflict any damage will be really diminished if they can't make any changes to the filesystem.
         pattern:
           metadata:
             <(annotations):

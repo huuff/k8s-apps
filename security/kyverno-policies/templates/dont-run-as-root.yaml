@@ -14,7 +14,9 @@ spec:
               kinds:
                 - Pod
       validate:
-        message: "`runAsNonRoot` should be `true`"
+        message: |
+          `runAsNonRoot` should be `true`.
+          Since the user namespace is shared with the host, without this setting, an intruder is only one container escape vulnerability from gaining full superuser control on the node.
         pattern:
           metadata:
             <(annotations):

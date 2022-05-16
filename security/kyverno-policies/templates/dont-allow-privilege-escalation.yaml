@@ -14,7 +14,9 @@ spec:
               kinds:
                 - Pod
       validate:
-        message: "`allowPrivilegeEscalation` should be `false`"
+        message: |
+          `allowPrivilegeEscalation` should be `false`
+          If the user namespace is shared between the host and the container, escalating privileges in the container equals escalating privileges on the host. Compounded with a container escape vulnerability, this setting can be devastating.
         pattern:
           metadata:
             <(annotations):
