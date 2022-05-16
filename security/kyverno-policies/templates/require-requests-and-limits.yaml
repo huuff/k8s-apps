@@ -1,0 +1,33 @@
+{{-  $policyName := "require-requests-and-limits" -}}
+
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: {{ $policyName }}
+spec:
+  validationFailureAction: enforce
+  rules:
+    - name: {{ $policyName }}
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      validate:
+        message: |
+          You should provide resource requests and limits for your containers.
+          Providing resource requests for a container helps the scheduler better decide what node is appropriate to run the pod. Without resource limits, containers can grow unbounded, starve other pods and allow denial of service attacks. In general, providing resource requests and limits makes container resource usage more predictable.
+        pattern:
+          metadata:
+            <(annotations):
+              "X(kyverno.haff.xyz/ignore-{{ $policyName }})": "?*"
+          spec:
+            containers:
+              - resources:
+                  requests:
+                    memory: "?*"
+                    cpu: "?*"
+                  limits:
+                    memory: "?*"
+                    cpu: "?*"
+
