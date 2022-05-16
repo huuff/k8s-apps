@@ -13,6 +13,7 @@ spec:
           - resources:
               kinds:
                 - Pod
+              namespaces: {{- toYaml .Values.namespaces | nindent 14 }}
       validate:
         message: |
           `runAsNonRoot` should be `true`.

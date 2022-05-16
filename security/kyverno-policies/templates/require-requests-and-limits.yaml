@@ -13,6 +13,7 @@ spec:
           - resources:
               kinds:
                 - Pod
+              namespaces: {{- toYaml .Values.namespaces | nindent 14 }}
       validate:
         message: |
           You should provide resource requests and limits for your containers.
