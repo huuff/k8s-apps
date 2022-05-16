@@ -23,6 +23,7 @@ spec:
         - containerPort: 80
         securityContext:
           allowPrivilegeEscalation: false
+        imagePullPolicy: Always
         resources:
           requests:
             memory: "100Mi"
