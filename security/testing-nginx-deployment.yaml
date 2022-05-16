@@ -12,6 +12,7 @@ spec:
     metadata:
       annotations:
         "kyverno.haff.xyz/ignore-dont-run-as-root": "yes"
+        "kyverno.haff.xyz/ignore-make-root-fs-readonly": "yes"
       labels:
         app: nginx
     spec:

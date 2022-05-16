@@ -1,0 +1,25 @@
+{{-  $policyName := "make-root-fs-readonly" -}}
+
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: {{ $policyName }}
+spec:
+  validationFailureAction: enforce
+  rules:
+    - name: {{ $policyName }}
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      validate:
+        message: "`readOnlyRootFilesystem` should be `true`"
+        pattern:
+          metadata:
+            <(annotations):
+              "X(kyverno.haff.xyz/ignore-{{ $policyName }})": "?*"
+          spec:
+            containers:
+              - securityContext:
+                  readOnlyRootFilesystem: true
