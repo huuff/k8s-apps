@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      annotations:
+        # TODO: Remove once I find appropriate settings
+        "kyverno.haff.xyz/ignore-require-requests-and-limits": "yes"
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: gotify
+          image: gotify/server@{{ .Values.digest }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.port }}
+          volumeMounts:
+            - name: gotify-data
+              mountPath: /app/data
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+          env:
+            - name: GOTIFY_SERVER_PORT
+              value: {{ .Values.port | quote }}
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: {{ .Values.user }}
+        runAsGroup: {{ .Values.group }}
+      volumes:
+        - name: gotify-data
+          emptyDir: {}

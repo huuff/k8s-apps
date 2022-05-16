@@ -1,0 +1,7 @@
+apiVersion: v2
+name: gotify
+description: Gotify push notifications service
+
+type: application
+version: 0.1.0
+appVersion: "2.1.4"

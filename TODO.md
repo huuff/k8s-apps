@@ -8,3 +8,6 @@
 * Use a vertical pod autoscaler (VPA) for my apps
 * Some AppArmor, SELinux, seccomp profiles (Is there a bane controller/operator? Can I make it?)
 * (Emanote) Should allow specifying several repositories to create a layered zettelkasten
+
+# Gotify
+* Allow a different backend database, like postgres

@@ -30,3 +30,6 @@ releases:
         value: "keys-tls"
       - name: ingress.host
         value: "keys.haff.xyz"
+  - name: gotify
+    namespace: default
+    chart: ./gotify
