@@ -12,8 +12,7 @@ spec:
               kinds:
                 - Pod
       validate:
-        message: |
-          `runAsNonRoot` should be `true`
+        message: "`runAsNonRoot` should be `true`"
         pattern:
           metadata:
             <(annotations):
