@@ -6,8 +6,9 @@
 * Encrypt secrets
 * A controller that removes pods after some time specified by an annotation
 * Use a vertical pod autoscaler (VPA) for my apps
-* Some AppArmor, SELinux, seccomp profiles (Is there a bane controller/operator? Can I make it?)
+* Some AppArmor, SELinux, seccomp profiles (Is there a bane controller/operator? Can I make it?) (runtime/default? does containerd have one?)
 * (Emanote) Should allow specifying several repositories to create a layered zettelkasten
+* Some audit policy
 
 # Gotify
 * Allow a different backend database, like postgres
