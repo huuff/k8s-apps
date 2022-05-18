@@ -84,6 +84,7 @@ spec:
               mountPath: /app/data
             - name: gotify-config
               mountPath: /etc/gotify
+              readOnly: true
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
@@ -101,4 +102,5 @@ spec:
         - name: gotify-data
           emptyDir: {}
         - name: gotify-config
-          emptyDir: {} # TODO: Memory? It has secrets
+          emptyDir:
+            medium: Memory
