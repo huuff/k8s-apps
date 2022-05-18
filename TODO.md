@@ -24,3 +24,4 @@
 * More kyverno policies:
   * No `hostPID`, no `hostNetwork` and no `hostIPC`
   * No privileged containers
+* Some way of checking image signatures to prevent supply chain attacks?
