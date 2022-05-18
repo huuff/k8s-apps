@@ -33,3 +33,18 @@ releases:
   - name: gotify
     namespace: default
     chart: ./gotify
+    set:
+      - name: "database.dialect"
+        value: "postgres"
+      - name: "database.host"
+        value: "acid-gotify"
+      - name: "database.port"
+        value: 5432
+      - name: "database.name"
+        value: "gotify"
+      - name: "database.credentials.secretName"
+        value: "gotify.acid-gotify.credentials.postgresql.acid.zalan.do"
+      - name: "database.credentials.userKey"
+        value: "username"
+      - name: "database.credentials.passwordKey"
+        value: "password"

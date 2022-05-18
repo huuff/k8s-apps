@@ -4,9 +4,15 @@ group: 7890
 port: 8080
 
 database:
-  dialect: "sqlite"
+  dialect: "sqlite3"
   host: ""
   port: ""
-  user: ""
-  dbname: ""
-  password: ""
+  name: ""
+  credentials:
+    secretName: ""
+    userKey: ""
+    passwordKey: ""
+
+defaultuser:
+  name: admin
+  pass: admin

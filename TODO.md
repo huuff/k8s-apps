@@ -12,6 +12,5 @@
 * Disable anonymous auth
 * Some network policies
 * Make the postgres operator work with my kyverno policies
+* (test) Allowing elevated privileges is effectively the same as running as root. Try to fix that somehow (there's a ping allowed range for sysctl?)
 
-# Gotify
-* Allow a different backend database, like postgres
