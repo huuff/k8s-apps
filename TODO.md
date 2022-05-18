@@ -11,6 +11,7 @@
 * Some audit policy
 * Disable anonymous auth
 * Some network policies
+* Make the postgres operator work with my kyverno policies
 
 # Gotify
 * Allow a different backend database, like postgres
