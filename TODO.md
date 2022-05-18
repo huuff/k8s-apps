@@ -13,4 +13,6 @@
 * Some network policies
 * Make the postgres operator work with my kyverno policies
 * (test) Allowing elevated privileges is effectively the same as running as root. Try to fix that somehow (there's a ping allowed range for sysctl?)
+* (kube-bench) some additional work is needed, such as allowing access to HOST's PID namespace, check [this resource](https://github.com/aquasecurity/kube-bench/blob/main/docs/running.md#running-kube-bench)
+* A krew plugin that allows deploying a `pgcli` connection to a Zalando's postgres deployment?
 
