@@ -9,6 +9,8 @@
 * Some AppArmor, SELinux, seccomp profiles (Is there a bane controller/operator? Can I make it?) (runtime/default? does containerd have one?)
 * (Emanote) Should allow specifying several repositories to create a layered zettelkasten
 * Some audit policy
+* Disable anonymous auth
+* Some network policies
 
 # Gotify
 * Allow a different backend database, like postgres
