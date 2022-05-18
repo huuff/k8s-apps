@@ -55,13 +55,16 @@ spec:
               server:
                 keepaliveperiodseconds: 0
                 listenaddr: "" 
-                port: ${SERVER_PORT} # Gotify ignores this completely, just setting it for reference, and actually using an envvar
+                port: ${SERVER_PORT} 
                 stream:
                   pingperiodseconds: 45 
               database:
                 dialect: ${DB_DIALECT}
-                # TODO: Enable sqlite3
+              {{- if eq .Values.database.dialect "postgres" }}
                 connection: "host=${DB_HOST} port=${DB_PORT} dbname=${DB_NAME} user=${DB_USER} password=${DB_PASSWORD}"
+              {{- else if eq .Values.database.dialect "sqlite3" }}
+                connection: data/gotify.db
+              {{- end }}
               defaultuser:
                 name: ${DEFAULTUSER_NAME}
                 pass: ${DEFAULTUSER_PASS}
@@ -88,9 +91,6 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
-          env:
-            - name: GOTIFY_SERVER_PORT
-              value: {{ .Values.port | quote }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       automountServiceAccountToken: false

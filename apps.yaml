@@ -34,8 +34,10 @@ releases:
     namespace: default
     chart: ./gotify
     set:
+      - name: "port"
+        value: "7374"
       - name: "database.dialect"
-        value: "postgres"
+        value: "sqlite3"
       - name: "database.host"
         value: "acid-gotify"
       - name: "database.port"
