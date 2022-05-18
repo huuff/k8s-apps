@@ -57,7 +57,7 @@ spec:
               server:
                 keepaliveperiodseconds: 0
                 listenaddr: "" 
-                port: ${SERVER_PORT}
+                port: ${SERVER_PORT} # Gotify ignores this completely, just setting it for reference, and actually using an envvar
                 stream:
                   pingperiodseconds: 45 
               database:
@@ -80,7 +80,7 @@ spec:
           image: gotify/server@{{ .Values.digest }}
           imagePullPolicy: Always
           ports:
-            - containerPort: 80 #{{ .Values.port }}
+            - containerPort: {{ .Values.port }}
           volumeMounts:
             - name: gotify-data
               mountPath: /app/data
@@ -89,6 +89,9 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
+          env:
+            - name: GOTIFY_SERVER_PORT
+              value: {{ .Values.port | quote }}
         - name: debug
           image: busybox
           command: [ "sleep", "3600" ]
@@ -96,10 +99,10 @@ spec:
             - name: gotify-config
               mountPath: /etc/gotify
       automountServiceAccountToken: false
-      #securityContext:
-        #runAsNonRoot: true
-        #runAsUser: {{ .Values.user }}
-        #runAsGroup: {{ .Values.group }}
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: {{ .Values.user }}
+        runAsGroup: {{ .Values.group }}
       volumes:
         - name: gotify-data
           emptyDir: {}
