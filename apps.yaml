@@ -35,9 +35,9 @@ releases:
     chart: ./gotify
     set:
       - name: "port"
-        value: "7374"
+        value: "8080"
       - name: "database.dialect"
-        value: "sqlite3"
+        value: "postgres"
       - name: "database.host"
         value: "acid-gotify"
       - name: "database.port"

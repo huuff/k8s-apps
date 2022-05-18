@@ -93,6 +93,9 @@ spec:
             readOnlyRootFilesystem: true
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: GOTIFY_SERVER_PORT
+              value: "" # This is predefined in the image, making it impossible to use config.yml by default
       automountServiceAccountToken: false
       securityContext:
         runAsNonRoot: true
