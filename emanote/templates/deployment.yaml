@@ -34,6 +34,9 @@ spec:
           securityContext:
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - all
           resources:
             {{- toYaml .Values.gitSync.resources | nindent 12 }}
           lifecycle:
@@ -72,6 +75,9 @@ spec:
           securityContext:
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - all
       securityContext:
         runAsNonRoot: true
         runAsUser: {{ .Values.securityContext.user }}
