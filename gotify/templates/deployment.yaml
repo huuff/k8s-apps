@@ -31,18 +31,6 @@ spec:
             - name: DB_NAME
               value: {{ .Values.database.name }}
           {{- end }}
-          {{- if .Values.database.credentials.secretName }}
-            - name: DB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.database.credentials.secretName }}
-                  key: {{ .Values.database.credentials.userKey }}
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef: 
-                  name: {{ .Values.database.credentials.secretName }}
-                  key: {{ .Values.database.credentials.passwordKey }}
-          {{- end }}
             - name: DEFAULTUSER_NAME
               value: {{ .Values.defaultuser.name }}
             - name: DEFAULTUSER_PASS
@@ -61,7 +49,7 @@ spec:
               database:
                 dialect: ${DB_DIALECT}
               {{- if eq .Values.database.dialect "postgres" }}
-                connection: "host=${DB_HOST} port=${DB_PORT} dbname=${DB_NAME} user=${DB_USER} password=${DB_PASSWORD}"
+                connection: "host=${DB_HOST} port=${DB_PORT} dbname=${DB_NAME} user=$(cat /secrets/database-credentials/username) password=$(cat /secrets/database-credentials/password)"
               {{- else if eq .Values.database.dialect "sqlite3" }}
                 connection: data/gotify.db
               {{- end }}
@@ -76,6 +64,10 @@ spec:
           volumeMounts:
             - name: gotify-config
               mountPath: /etc/gotify
+          {{- if .Values.database.credentials.secretName }}
+            - name: database-credentials
+              mountPath: /secrets/database-credentials
+          {{- end }}
       containers:
         - name: gotify
           image: gotify/server@{{ .Values.digest }}
@@ -107,3 +99,14 @@ spec:
         - name: gotify-config
           emptyDir:
             medium: Memory
+        {{- if .Values.database.credentials.secretName }}
+        - name: database-credentials
+          secret:
+            secretName: {{ .Values.database.credentials.secretName }}
+            optional: true
+            items:
+              - key: {{ .Values.database.credentials.userKey }}
+                path: username
+              - key: {{ .Values.database.credentials.passwordKey }}
+                path: password
+        {{- end }}

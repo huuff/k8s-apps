@@ -18,7 +18,7 @@
 * Make the postgres operator work with my kyverno policies
 * (test) Allowing elevated privileges is effectively the same as running as root. Try to fix that somehow (there's a ping allowed range for sysctl?)
 * A krew plugin that allows deploying a `pgcli` connection to a Zalando's postgres deployment?
-* (gotify) mount secrets as volumes into the init container
+* (gotify) mysql?
 * The anchore controller seems unmaintained... what about the trivy operator?
 * More kyverno policies:
   * No `hostPID`, no `hostNetwork` and no `hostIPC`
