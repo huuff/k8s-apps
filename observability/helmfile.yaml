@@ -5,6 +5,7 @@ repositories:
     url: https://charts.deliveryhero.io/
 
 # TODO: Currently only using it through port-forwarding... use an ingress
+# TODO: Also a nice way of setting up a password obviously
 releases:
   - name: kube-prometheus
     namespace: observability
