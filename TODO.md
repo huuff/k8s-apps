@@ -7,7 +7,6 @@
 * Use a vertical pod autoscaler (VPA) for my apps
 * Some AppArmor, SELinux, seccomp profiles (Is there a bane controller/operator? Can I make it?)
 * LSM profiles:
-  * Seccomp (runtime/default? drop all capabilities?)
   * AppArmor (bane? a bane controller?)
   * SELinux (no idea)
 * (Emanote) Should allow specifying several repositories to create a layered zettelkasten
