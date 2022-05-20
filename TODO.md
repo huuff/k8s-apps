@@ -16,7 +16,5 @@
 * A krew plugin that allows deploying a `pgcli` connection to a Zalando's postgres deployment?
 * (gotify) mysql?
 * The anchore controller seems unmaintained... what about the trivy operator?
-* More kyverno policies:
-  * It drops all capabilities? (whether it adds back all necessary then or not)
 * Some way of checking image signatures to prevent supply chain attacks?
 * Setup falco?

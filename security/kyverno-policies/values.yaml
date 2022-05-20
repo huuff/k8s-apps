@@ -29,3 +29,6 @@ dontRunPrivilegedContainers:
 
 dontUseHostPathVolumes:
   enabled: true
+
+dropAllCapabilities:
+  enabled: true
