@@ -17,8 +17,8 @@
 * (gotify) mysql?
 * The anchore controller seems unmaintained... what about the trivy operator?
 * More kyverno policies:
-  * No `hostPID`, no `hostNetwork` and no `hostIPC`
   * No privileged containers
   * It drops all capabilities? (whether it adds back all necessary then or not)
+  * Not mounting `hostPath`s
 * Some way of checking image signatures to prevent supply chain attacks?
 * Setup falco?

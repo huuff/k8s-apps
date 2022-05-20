@@ -20,3 +20,6 @@ makeRootFilesystemReadonly:
 
 requireRequestsAndLimits:
   enabled: true
+
+dontUseHostNamespaces:
+  enabled: true
