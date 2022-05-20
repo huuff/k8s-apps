@@ -68,6 +68,12 @@ spec:
             - name: database-credentials
               mountPath: /secrets/database-credentials
           {{- end }}
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - all
       containers:
         - name: gotify
           image: gotify/server@{{ .Values.digest }}
@@ -83,6 +89,9 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - all
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
