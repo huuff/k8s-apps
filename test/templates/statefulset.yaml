@@ -36,6 +36,11 @@ spec:
             # ping won't work. Seems like adding CAP_NET_RAW won't do it
             allowPrivilegeEscalation: true
             readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - all
+              add:
+                - NET_RAW
       securityContext:
         runAsNonRoot: true
         runAsUser: {{ .Values.user }}
