@@ -1,6 +1,6 @@
 {{-  $policyName := "always-pull-images" -}}
 
-{{- if .Values.alwaysPullImages }}
+{{- if .Values.alwaysPullImages.enabled }}
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:

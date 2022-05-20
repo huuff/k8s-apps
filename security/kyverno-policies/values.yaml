@@ -23,3 +23,6 @@ requireRequestsAndLimits:
 
 dontUseHostNamespaces:
   enabled: true
+
+dontRunPrivilegedContainers:
+  enabled: true
