@@ -75,6 +75,9 @@ spec:
                 - name: report
                   mountPath: {{$reportDir}}
                   readOnly: true
+                - name: gotify-token
+                  mountPath: /secret
+                  readOnly: true
               command:
                 - "sh"
                 - "-c"
@@ -82,7 +85,7 @@ spec:
                   until [ -s {{$reportDir}}/output ]; do
                     sleep 1
                   done
-                  curl "{{ .Values.gotify.url }}/message?token={{.Values.gotify.apiToken }}" -F "title=kube-bench report" -F "message=$(cat {{$reportDir}}/output | grep -F '[FAIL]')"
+                  curl "{{ .Values.gotify.url }}/message?token=$(cat /secret/token)" -F "title=kube-bench report" -F "message=$(cat {{$reportDir}}/output | grep -F '[FAIL]')"
             {{- end }}
           restartPolicy: Never
           volumes:
@@ -122,5 +125,12 @@ spec:
           {{- if .Values.gotify.enabled }}
             - name: report
               emptyDir: {}
+            - name: gotify-token
+              secret:
+                secretName: {{ .Values.gotify.token.secretName }}
+                optional: false
+                items:
+                  - key: {{ .Values.gotify.token.keyName }}
+                    path: token
           {{- end }}
 

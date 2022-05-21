@@ -2,7 +2,6 @@ repositories:
   - name: kyverno
     url: https://kyverno.github.io/kyverno/
 
-
 releases:
   - name: kube-bench
     chart: ./kube-bench
@@ -12,8 +11,10 @@ releases:
         value: true
       - name: "gotify.url"
         value: "gotify.default.svc.cluster.local:8080"
-      - name: "gotify.apiToken"
-        value: "ABmlC9OCLVIv723"
+      - name: "gotify.token.secretName"
+        value: "gotify-security-token"
+      - name: "gotify.token.keyName"
+        value: "token"
       - name: "schedule"
         value: "* * * * *"
   - name: kube-hunter
