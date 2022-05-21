@@ -5,7 +5,6 @@
 * A pod that monitors a web page to ensure it won't change
 * A controller that removes pods after some time specified by an annotation
 * Use a vertical pod autoscaler (VPA) for my apps
-* Some AppArmor, SELinux, seccomp profiles (Is there a bane controller/operator? Can I make it?)
 * LSM profiles:
   * AppArmor (bane? a bane controller?)
   * SELinux (no idea)
