@@ -18,3 +18,4 @@
 * The anchore controller seems unmaintained... what about the trivy operator?
 * Some way of checking image signatures to prevent supply chain attacks?
 * Setup falco?
+* `kube-bench` and `kube-hunter` shouldn't notify when there's nothing to notify

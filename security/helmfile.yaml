@@ -18,8 +18,6 @@ releases:
   - name: kube-hunter
     chart: ./kube-hunter
     set:
-      - name: "schedule"
-        value: "* * * * *"
       - name: "gotify.enabled"
         value: true
       - name: "gotify.url"
