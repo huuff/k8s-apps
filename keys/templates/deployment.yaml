@@ -34,6 +34,8 @@ spec:
               mountPath: /tmp
           securityContext:
             readOnlyRootFilesystem: true
+            seccompProfile:
+              type: RuntimeDefault
             capabilities:
               drop:
                 - all
@@ -64,6 +66,8 @@ spec:
             capabilities:
               drop:
                 - all
+            seccompProfile:
+              type: RuntimeDefault
       automountServiceAccountToken: false
       securityContext:
         runAsNonRoot: true

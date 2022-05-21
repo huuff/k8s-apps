@@ -36,6 +36,8 @@ spec:
             # ping won't work. Seems like adding CAP_NET_RAW won't do it
             allowPrivilegeEscalation: true
             readOnlyRootFilesystem: true
+            seccompProfile:
+              type: RuntimeDefault
             capabilities:
               drop:
                 - all

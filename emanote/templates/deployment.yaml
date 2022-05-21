@@ -37,6 +37,8 @@ spec:
             capabilities:
               drop:
                 - all
+            seccompProfile:
+              type: RuntimeDefault
           resources:
             {{- toYaml .Values.gitSync.resources | nindent 12 }}
           lifecycle:
@@ -75,6 +77,8 @@ spec:
           securityContext:
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
             capabilities:
               drop:
                 - all
