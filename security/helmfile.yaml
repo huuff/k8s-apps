@@ -15,8 +15,6 @@ releases:
         value: "gotify-security-token"
       - name: "gotify.token.keyName"
         value: "token"
-      - name: "schedule"
-        value: "* * * * *"
   - name: kube-hunter
     chart: ./kube-hunter
     namespace: security
