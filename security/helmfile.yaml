@@ -1,6 +1,8 @@
 repositories:
   - name: kyverno
     url: https://kyverno.github.io/kyverno/
+  - name: falcosecurity
+    url: https://falcosecurity.github.io/charts
 
 releases:
   - name: kube-bench
@@ -32,3 +34,6 @@ releases:
     namespace: security
   - name: kyverno-policies
     chart: ./kyverno-policies
+  - name: falco
+    chart: falcosecurity/falco
+    namespace: security
