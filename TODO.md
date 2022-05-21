@@ -6,6 +6,7 @@
 * A controller that removes pods after some time specified by an annotation
 * Use a vertical pod autoscaler (VPA) for my apps
 * LSM profiles:
+  * Set the runtime default seccomp profile directly on my manifests
   * AppArmor (bane? a bane controller?)
   * SELinux (no idea)
 * (Emanote) Should allow specifying several repositories to create a layered zettelkasten

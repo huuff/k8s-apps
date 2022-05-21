@@ -7,6 +7,15 @@ releases:
   - name: kube-bench
     chart: ./kube-bench
     namespace: security
+    set:
+      - name: "gotify.enabled"
+        value: true
+      - name: "gotify.url"
+        value: "gotify.default.svc.cluster.local:8080"
+      - name: "gotify.apiToken"
+        value: "ABmlC9OCLVIv723"
+      - name: "schedule"
+        value: "* * * * *"
   - name: kube-hunter
     chart: ./kube-hunter
     namespace: security
