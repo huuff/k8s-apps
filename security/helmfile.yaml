@@ -17,18 +17,6 @@ releases:
         value: "gotify-security-token"
       - name: "gotify.token.keyName"
         value: "token"
-  - name: kube-hunter
-    chart: ./kube-hunter
-    set:
-      - name: "gotify.enabled"
-        value: true
-      - name: "gotify.url"
-        value: "gotify.default.svc.cluster.local:8080"
-      - name: "gotify.token.secretName"
-        value: "gotify-security-token"
-      - name: "gotify.token.keyName"
-        value: "token"
-    namespace: security
   - name: kyverno
     chart: kyverno/kyverno
     namespace: security
@@ -37,3 +25,22 @@ releases:
   - name: falco
     chart: falcosecurity/falco
     namespace: security
+
+      
+# Disabled as I don't find it very useful...
+# It'll only tell you the vulnerabilities of a compromised pod
+# if you run it as an unsecured pod... but then, why would you run it?
+# Perhaps I should run it in a mode different to pod mode
+
+#- name: kube-hunter
+#  chart: ./kube-hunter
+#  set:
+#    - name: "gotify.enabled"
+#      value: true
+#    - name: "gotify.url"
+#      value: "gotify.default.svc.cluster.local:8080"
+#    - name: "gotify.token.secretName"
+#      value: "gotify-security-token"
+#    - name: "gotify.token.keyName"
+#      value: "token"
+#  namespace: security
