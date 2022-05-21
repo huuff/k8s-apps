@@ -5,15 +5,13 @@
 * A pod that monitors a web page to ensure it won't change
 * A controller that removes pods after some time specified by an annotation
 * Use a vertical pod autoscaler (VPA) for my apps
-* LSM profiles:
-  * AppArmor (bane? a bane controller?)
+* Some AppArmor profiles... is there a `bane` controller?
 * (Emanote) Should allow specifying several repositories to create a layered zettelkasten
 * Some audit policy
 * Some network policies
 * Make the postgres operator work with my kyverno policies
 * A krew plugin that allows deploying a `pgcli` connection to a Zalando's postgres deployment?
 * (gotify) mysql?
-* The anchore controller seems unmaintained... what about the trivy operator?
 * Some way of checking image signatures to prevent supply chain attacks?
 * `kube-bench` and `kube-hunter` shouldn't notify when there's nothing to notify
 * Some way of notifying falco issues through gotify
