@@ -1,7 +1,6 @@
 apiVersion: v2
 name: kube-hunter
 description: A cronjob for kube-hunter
-# TODO: Set up some way of notifying failures
 
 type: application
 version: 0.1.0

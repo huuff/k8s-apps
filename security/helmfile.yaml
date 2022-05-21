@@ -17,6 +17,17 @@ releases:
         value: "token"
   - name: kube-hunter
     chart: ./kube-hunter
+    set:
+      - name: "schedule"
+        value: "* * * * *"
+      - name: "gotify.enabled"
+        value: true
+      - name: "gotify.url"
+        value: "gotify.default.svc.cluster.local:8080"
+      - name: "gotify.token.secretName"
+        value: "gotify-security-token"
+      - name: "gotify.token.keyName"
+        value: "token"
     namespace: security
   - name: kyverno
     chart: kyverno/kyverno
