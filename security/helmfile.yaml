@@ -11,8 +11,6 @@ releases:
     chart: ./kube-bench
     namespace: security
     set:
-      - name: "schedule"
-        value: "* * * * *"
       - name: "gotify.enabled"
         value: true
       - name: "gotify.url"
