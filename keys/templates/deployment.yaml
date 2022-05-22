@@ -34,8 +34,6 @@ spec:
               mountPath: /tmp
           securityContext:
             readOnlyRootFilesystem: true
-            seccompProfile:
-              type: RuntimeDefault
             capabilities:
               drop:
                 - all
@@ -66,13 +64,13 @@ spec:
             capabilities:
               drop:
                 - all
-            seccompProfile:
-              type: RuntimeDefault
       automountServiceAccountToken: false
       securityContext:
         runAsNonRoot: true
         runAsUser: {{ .Values.securityContext.user }}
         runAsGroup: {{ .Values.securityContext.group }}
+        seccompProfile:
+          type: RuntimeDefault
       volumes:
         - name: nginx-conf
           configMap:

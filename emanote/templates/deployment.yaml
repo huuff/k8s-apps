@@ -37,8 +37,6 @@ spec:
             capabilities:
               drop:
                 - all
-            seccompProfile:
-              type: RuntimeDefault
           resources:
             {{- toYaml .Values.gitSync.resources | nindent 12 }}
           lifecycle:
@@ -77,8 +75,6 @@ spec:
           securityContext:
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
-            seccompProfile:
-              type: RuntimeDefault
             capabilities:
               drop:
                 - all
@@ -86,6 +82,8 @@ spec:
         runAsNonRoot: true
         runAsUser: {{ .Values.securityContext.user }}
         runAsGroup: {{ .Values.securityContext.group }}
+        seccompProfile:
+          type: RuntimeDefault
       automountServiceAccountToken: false
       volumes:
         - name: syncdir
