@@ -27,4 +27,10 @@ spec:
             containers:
               - securityContext:
                   readOnlyRootFilesystem: true
+            =(initContainers):
+              - securityContext:
+                  readOnlyRootFilesystem: true
+            =(ephemeralContainers):
+              - securityContext:
+                  readOnlyRootFilesystem: true
 {{- end -}}

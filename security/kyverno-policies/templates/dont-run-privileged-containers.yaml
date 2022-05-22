@@ -25,6 +25,13 @@ spec:
               "X(kyverno.haff.xyz/ignore-{{ $policyName }})": "?*"
           spec:
             containers:
-              - securityContext:
+              - =(securityContext):
                   =(privileged): false
+            =(initContainers):
+              - =(securityContext):
+                  =(privileged): false
+            =(ephemeralContainers):
+              - =(securityContext):
+                  =(privileged): false
+
 {{- end -}}

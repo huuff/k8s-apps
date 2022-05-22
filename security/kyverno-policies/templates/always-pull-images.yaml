@@ -23,10 +23,14 @@ spec:
           * If the image to which the layer points changes for example to provide security updates, these changes won't be picked up until the cached image expires
           * Getting the image bypasses the registry authorization mechanisms, so an attacker can start a pod with that image without appropriate credentials
         pattern:
-          metadata:
+          =(metadata):
             <(annotations):
-              "X(kyverno.haff.xyz/ignore-{{ $policyName }})": "?*"
+              "X(kyverno.haff.xyz/ignore-{{ $policyName }})": "*"
           spec:
             containers:
+              - imagePullPolicy: Always
+            =(initContainers):
+              - imagePullPolicy: Always
+            =(ephemeralContainers):
               - imagePullPolicy: Always
 {{- end -}}

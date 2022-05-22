@@ -13,6 +13,8 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}
+      annotations:
+        "kyverno.haff.xyz/ignore-always-pull-images": "yes"
     spec:
       containers:
         - name: git-sync

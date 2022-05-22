@@ -28,4 +28,14 @@ spec:
                   capabilities:
                     =(drop):
                       - all
+            =(initContainers):
+              - securityContext:
+                  capabilities:
+                    =(drop):
+                      - all
+            =(ephemeralContainers):
+              - securityContext:
+                  capabilities:
+                    =(drop):
+                      - all
 {{- end -}}

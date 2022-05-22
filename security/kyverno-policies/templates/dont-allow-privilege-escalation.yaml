@@ -27,4 +27,10 @@ spec:
             containers:
               - securityContext:
                   allowPrivilegeEscalation: false
+            =(initContainers):
+              - securityContext:
+                  allowPrivilegeEscalation: false
+            =(ephemeralContainers):
+              - securityContext:
+                  allowPrivilegeEscalation: false
 {{- end -}}

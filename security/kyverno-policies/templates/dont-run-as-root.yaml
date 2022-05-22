@@ -22,7 +22,7 @@ spec:
         pattern:
           metadata:
             <(annotations):
-              "X(kyverno.haff.xyz/ignore-{{ $policyName }}": "?*"
+              "X(kyverno.haff.xyz/ignore-{{ $policyName }})": "*"
           spec:
             securityContext:
               runAsNonRoot: true

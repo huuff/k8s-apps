@@ -16,5 +16,4 @@
 * Gotify reporting:
   * `falco` reporting
   * `trivy` reporting
-* My kyverno policies should take into account `initContainers`, `ephemeralContainers`, etc.
 * Install glusterfs
