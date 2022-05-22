@@ -24,8 +24,7 @@ spec:
             <(annotations):
               "X(kyverno.haff.xyz/ignore-{{ $policyName }})": "?*"
           spec:
-            containers:
-              - securityContext:
-                  seccompProfile:
-                    type: "*"
+            securityContext:
+                seccompProfile:
+                  type: "*"
 {{- end -}}
