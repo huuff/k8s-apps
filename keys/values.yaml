@@ -1,9 +1,24 @@
 nginx:
   digest: sha256:efc09388b15fb423c402f0b8b28ca70c7fd20fe31f8d7531ae1896bbb4944999
+  resources:
+    requests:
+      cpu: "5m"
+      memory: "5Mi"
+    limits:
+      cpu: "25m"
+      memory: "25Mi"
+
 
 indexer:
   digest: sha256:52f431d980baa76878329b68ddb69cb124c25efa6e206d8b0bd797a828f0528e
   secondsBetweenRefreshes: 60
+  resources:
+    requests:
+      cpu: "5m"
+      memory: "5Mi"
+    limits:
+      cpu: "25m"
+      memory: "25Mi"
 
 ingress:
   enabled: true

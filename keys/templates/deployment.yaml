@@ -17,6 +17,7 @@ spec:
       containers:
         - name: nginx
           image: nginx:alpine@{{ .Values.nginx.digest }}
+          imagePullPolicy: Always
           ports:
             - containerPort: {{ .Values.port }}
           volumeMounts:
@@ -32,13 +33,19 @@ spec:
               mountPath: /var/run
             - name: tmp
               mountPath: /tmp
+          resources:
+            {{- toYaml .Values.nginx.resources | nindent 12 }}
           securityContext:
+            allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
             capabilities:
               drop:
                 - all
         - name: indexer
           image: busybox@{{ .Values.indexer.digest }}
+          imagePullPolicy: Always
+          resources:
+            {{- toYaml .Values.indexer.resources | nindent 12 }}
           volumeMounts:
             - name: ssh-keys
               mountPath: /keys
@@ -60,6 +67,7 @@ spec:
                 sleep {{ .Values.indexer.secondsBetweenRefreshes }}
               done
           securityContext:
+            allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
             capabilities:
               drop:
