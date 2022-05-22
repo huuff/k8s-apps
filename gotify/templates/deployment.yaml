@@ -17,7 +17,8 @@ spec:
     spec:
       initContainers: 
         - name: create-config
-          image: busybox@sha256:52f431d980baa76878329b68ddb69cb124c25efa6e206d8b0bd797a828f0528e
+          image: busybox@{{ .Values.initContainer.digest }}
+          imagePullPolicy: Always
           env:
             - name: SERVER_PORT
               value: {{ .Values.port | quote }}
@@ -68,6 +69,8 @@ spec:
             - name: database-credentials
               mountPath: /secrets/database-credentials
           {{- end }}
+          resources:
+            {{- toYaml .Values.initContainer.resources | nindent 12 }}
           securityContext:
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false

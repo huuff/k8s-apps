@@ -17,10 +17,20 @@ defaultuser:
   name: admin
   pass: admin
 
-resouces:
+resources:
   requests:
     cpu: "15m"
     memory: "20Mi"
   limits:
     cpu: "150m"
     memory: "200Mi"
+
+initContainer:
+  digest: sha256:52f431d980baa76878329b68ddb69cb124c25efa6e206d8b0bd797a828f0528e
+  resources:
+    requests:
+      cpu: "10m"
+      memory: "10Mi"
+    limits:
+      cpu: "10m"
+      memory: "10Mi"
