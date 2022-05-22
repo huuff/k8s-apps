@@ -17,4 +17,4 @@
   * `falco` reporting
   * `trivy` reporting
 * Some way of notifying falco issues through gotify
-* Kyverno policy to check that containers have a seccomp profile
+* My kyverno policies should take into account `initContainers`, `ephemeralContainers`, etc.

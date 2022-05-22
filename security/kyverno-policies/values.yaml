@@ -32,3 +32,6 @@ dontUseHostPathVolumes:
 
 dropAllCapabilities:
   enabled: true
+
+requireSeccompProfile:
+  enabled: true
