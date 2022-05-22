@@ -18,3 +18,5 @@
   * `trivy` reporting
 * Some way of notifying falco issues through gotify
 * My kyverno policies should take into account `initContainers`, `ephemeralContainers`, etc.
+* Seccomp profile can be on the pod level?
+* Install glusterfs
