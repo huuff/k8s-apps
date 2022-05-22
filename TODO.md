@@ -16,5 +16,6 @@
 * Gotify reporting:
   * `falco` reporting
   * `trivy` reporting
+  * Reporting on failing kyverno policies?
 * Install glusterfs
 * Test all of my apps with my kyverno policies because it seems some might be wrong
