@@ -85,7 +85,14 @@ spec:
                   until [ -s {{$reportDir}}/output ]; do
                     sleep 1
                   done
-                  curl "{{ .Values.gotify.url }}/message?token=$(cat /secret/token)" -F "title=kube-bench report" -F "message=$(cat {{$reportDir}}/output | grep -F '[FAIL]')"
+
+                  ALERTS=$(cat {{$reportDir}}/output | grep -F '[FAIL]')
+                  if [ ! -z "$ALERTS" ]; then
+                    curl "{{ .Values.gotify.url }}/message?token=$(cat /secret/token)" \
+                        -F "title=kube-bench report" \
+                        -F "message=$ALERTS"
+                  fi
+
             {{- end }}
           restartPolicy: Never
           volumes:

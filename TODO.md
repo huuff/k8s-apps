@@ -14,7 +14,6 @@
 * (gotify) mysql?
 * Some way of checking image signatures to prevent supply chain attacks?
 * Gotify reporting:
-  * For `kube-bench` (and `kube-hunter`?): don't report if there aren't issues
   * `falco` reporting
   * `trivy` reporting
 * Some way of notifying falco issues through gotify
