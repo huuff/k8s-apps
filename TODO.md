@@ -13,6 +13,9 @@
 * A krew plugin that allows deploying a `pgcli` connection to a Zalando's postgres deployment?
 * (gotify) mysql?
 * Some way of checking image signatures to prevent supply chain attacks?
-* `kube-bench` and `kube-hunter` shouldn't notify when there's nothing to notify
+* Gotify reporting:
+  * For `kube-bench` (and `kube-hunter`?): don't report if there aren't issues
+  * `falco` reporting
+  * `trivy` reporting
 * Some way of notifying falco issues through gotify
 * Kyverno policy to check that containers have a seccomp profile
