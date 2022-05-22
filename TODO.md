@@ -17,3 +17,4 @@
   * `falco` reporting
   * `trivy` reporting
 * Install glusterfs
+* Test all of my apps with my kyverno policies because it seems some might be wrong
