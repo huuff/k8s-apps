@@ -13,6 +13,10 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}
+      {{- if .Values.verticalPodAutoscaler.enabled }}
+      annotations:
+        "kyverno.haff.xyz/ignore-require-requests-and-limits": "yes"
+      {{- end }}
     spec:
       containers:
         - name: nginx
@@ -33,8 +37,10 @@ spec:
               mountPath: /var/run
             - name: tmp
               mountPath: /tmp
+          {{- if not .Values.verticalPodAutoscaler.enabled }}
           resources:
             {{- toYaml .Values.nginx.resources | nindent 12 }}
+          {{- end }}
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
@@ -44,8 +50,10 @@ spec:
         - name: indexer
           image: busybox@{{ .Values.indexer.digest }}
           imagePullPolicy: Always
+          {{- if not .Values.verticalPodAutoscaler.enabled }}
           resources:
             {{- toYaml .Values.indexer.resources | nindent 12 }}
+          {{- end }}
           volumeMounts:
             - name: ssh-keys
               mountPath: /keys

@@ -36,3 +36,7 @@ securityContext:
 port: 8080
 replicas: 1
 keys: {}
+
+verticalPodAutoscaler:
+  enabled: false
+  mode: "Auto"
