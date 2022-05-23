@@ -57,3 +57,5 @@ releases:
         value: "username"
       - name: "database.credentials.passwordKey"
         value: "password"
+      - name: "verticalPodAutoscaler.enabled"
+        value: "true"

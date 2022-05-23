@@ -4,7 +4,6 @@
 * `cert-manager` in my ingress helmfile, maybe even try setting the cluster from 0 using just helmfiles
 * A pod that monitors a web page to ensure it won't change
 * A controller that removes pods after some time specified by an annotation
-* Use a vertical pod autoscaler (VPA) for my apps
 * Some AppArmor profiles... is there a `bane` controller?
 * (Emanote) Should allow specifying several repositories to create a layered zettelkasten
 * Some audit policy

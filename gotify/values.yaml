@@ -34,3 +34,7 @@ initContainer:
     limits:
       cpu: "10m"
       memory: "10Mi"
+
+verticalPodAutoscaler:
+  enabled: false
+  mode: "Auto"
