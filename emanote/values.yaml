@@ -36,3 +36,7 @@ ingress:
 securityContext:
   user: 1000
   group: 1000
+
+verticalPodAutoscaler:
+  enabled: false
+  mode: "Auto"

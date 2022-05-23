@@ -13,6 +13,8 @@ releases:
         value: "exobrain-tls"
       - name: ingress.host
         value: "exobrain.haff.xyz"
+      - name: "verticalPodAutoscaler.enabled"
+        value: true
   - name: test
     namespace: default
     chart: ./test
