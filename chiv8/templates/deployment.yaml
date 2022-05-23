@@ -45,7 +45,7 @@ spec:
 
               while true;
               do
-                curl -s "{{ .Values.watchedUrl }}" > current
+                curl -s "{{ .Values.watchedUrl }}" > current || exit 1
                 if [ ! -e previous ];
                 then
                   echo "[$(date)] First iteration, saving current state"

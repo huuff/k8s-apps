@@ -27,6 +27,8 @@ releases:
   - name: falco
     chart: falcosecurity/falco
     namespace: security
+  - name: deny-all-network-policy
+    chart: ./network-policies
   # Remember to label the namespaces you want to scan with trivy-scan=true
   - name: trivy-operator
     chart: devopstales/trivy-operator

@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  # This app only needs to make egress to github...
+  # But network-policies don't allow setting a FQDN target
+  # Maybe I should try to do this with istio?
+  podSelector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  ingress:
+    - ports:
+        - port: {{ .Values.emanote.port }}
+  egress:
+    - {}

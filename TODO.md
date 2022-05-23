@@ -6,7 +6,7 @@
 * Some AppArmor profiles... is there a `bane` controller?
 * (Emanote) Should allow specifying several repositories to create a layered zettelkasten
 * Some audit policy
-* Some network policies
+* Some network policies. UPDATE: Mostly done, I'm just missing some way to connect gotify to the DB
 * Make the postgres operator work with my kyverno policies
 * A krew plugin that allows deploying a `pgcli` connection to a Zalando's postgres deployment?
 * Gotify:
@@ -20,3 +20,6 @@
 * Install glusterfs
 * Use Apprise instead of gotify
 * Nicer kyverno annotations
+* Set my VPAs as default resources
+* Use version labels
+* Clean up `values.yaml`?
