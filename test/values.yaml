@@ -12,3 +12,7 @@ podDurationInSeconds: "3600"
 
 user: 1001
 group: 1001
+
+verticalPodAutoscaler:
+  enabled: false
+  mode: "Auto"

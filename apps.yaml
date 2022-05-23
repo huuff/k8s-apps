@@ -18,6 +18,9 @@ releases:
   - name: test
     namespace: default
     chart: ./test
+    set:
+      - name: "verticalPodAutoscaler.enabled"
+        value: true
   - name: keys
     namespace: default
     chart: ./keys

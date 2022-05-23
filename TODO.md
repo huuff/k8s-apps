@@ -11,7 +11,9 @@
 * Some network policies
 * Make the postgres operator work with my kyverno policies
 * A krew plugin that allows deploying a `pgcli` connection to a Zalando's postgres deployment?
-* (gotify) mysql?
+* Gotify:
+  * mysql?
+  * ingress
 * Some way of checking image signatures to prevent supply chain attacks?
 * Gotify reporting:
   * `falco` reporting
