@@ -48,18 +48,18 @@ spec:
                 curl -s "{{ .Values.watchedUrl }}" > current
                 if [ ! -e previous ];
                 then
-                  echo "First iteration, saving current state"
+                  echo "[$(date)] First iteration, saving current state"
                 else
                   DIFFERENCES=$(diff previous current)
                   if [ "$?" -ne "0" ];
                   then
-                    echo "There were changes!"
+                    echo "[$(date)] There were changes!"
                     echo "$DIFFERENCES"
                     curl -s "{{ .Values.gotify.url }}/message?token=$(cat /secrets/token)" \
                      -F "title={{ .Values.watchedUrl }} changed" \
                      -F "message=$DIFFERENCES" > /dev/null
                   else
-                    echo "All fine for this iteration"
+                    echo "[$(date)] No changes observed"
                   fi
                 fi
                 

@@ -20,4 +20,3 @@
 * Install glusterfs
 * Use Apprise instead of gotify
 * Nicer kyverno annotations
-* I think chiv8 isn't working?
