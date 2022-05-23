@@ -2,7 +2,6 @@
 * Try to set the `--control-plane-endpoint` to `cervantes.haff.xyz`
 * Try to set a load balancer for all nodes so I can point my subdomains there. UPDATE: Actually just use a hetzner LB for my ingress-nginx
 * `cert-manager` in my ingress helmfile, maybe even try setting the cluster from 0 using just helmfiles
-* A pod that monitors a web page to ensure it won't change
 * A controller that removes pods after some time specified by an annotation
 * Some AppArmor profiles... is there a `bane` controller?
 * (Emanote) Should allow specifying several repositories to create a layered zettelkasten
@@ -19,3 +18,4 @@
   * `trivy` reporting
   * Reporting on failing kyverno policies?
 * Install glusterfs
+* See if I can force a redeploy for "keys" `configMap` changes

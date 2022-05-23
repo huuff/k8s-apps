@@ -1,0 +1,5 @@
+apiVersion: v2
+name: chiv8
+description: A pod that notifies you when a monitored webpage changes
+version: 0.1.0
+appVersion: "1.16.0"

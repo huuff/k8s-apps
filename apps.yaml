@@ -59,3 +59,17 @@ releases:
         value: "password"
       - name: "verticalPodAutoscaler.enabled"
         value: "true"
+  - name: chiv8
+    namespace: default
+    chart: ./chiv8
+    set:
+      - name: "verticalPodAutoscaler.enabled"
+        value: true
+      - name: "watchedUrl"
+        value: "keys.default.svc.cluster.local:8080/all"
+      - name: "gotify.url"
+        value: "gotify.default.svc.cluster.local:8080"
+      - name: "gotify.token.secretName"
+        value: "gotify-keys-token"
+      - name: "gotify.token.keyName"
+        value: "token"

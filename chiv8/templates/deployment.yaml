@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  replicas: 1 # More than this would end in duplicated alerts
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+      {{- if .Values.verticalPodAutoscaler.enabled }}
+      annotations:
+        "kyverno.haff.xyz/ignore-require-requests-and-limits": "yes"
+      {{- end }}
+    spec:
+      containers:
+        - name: chiv8
+          image: alpine/curl@{{ .Values.digest }}
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: workdir
+              mountPath: /workdir
+            - name: gotify-token
+              mountPath: /secrets
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - all
+          {{- if not .Values.verticalPodAutoscaler.enabled }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- end }}
+          command:
+            - "/bin/sh"
+            - "-c"
+            - |
+              cd /workdir
+
+              while true;
+              do
+                curl -s "{{ .Values.watchedUrl }}" > current
+                if [ ! -e previous ];
+                then
+                  echo "First iteration, saving current state"
+                else
+                  DIFFERENCES=$(diff previous current)
+                  if [ "$?" -ne "0" ];
+                  then
+                    echo "There were changes!"
+                    echo "$DIFFERENCES"
+                    curl -s "{{ .Values.gotify.url }}/message?token=$(cat /secrets/token)" \
+                     -F "title={{ .Values.watchedUrl }} changed" \
+                     -F "message=$DIFFERENCES" > /dev/null
+                  else
+                    echo "All fine for this iteration"
+                  fi
+                fi
+                
+                cp current previous
+                sleep {{ .Values.refreshDelaySeconds }}
+              done
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: {{ .Values.securityContext.user }}
+        runAsGroup: {{ .Values.securityContext.group }}
+        seccompProfile:
+          type: RuntimeDefault
+      automountServiceAccountToken: false
+      volumes:
+        - name: workdir
+          emptyDir: {}
+        - name: gotify-token
+          secret:
+            optional: false
+            secretName: {{ .Values.gotify.token.secretName }}
+            items:
+              - key: {{ .Values.gotify.token.keyName }}
+                path: token
+
