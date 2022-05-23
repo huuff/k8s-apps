@@ -13,8 +13,10 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}
-      {{- if .Values.verticalPodAutoscaler.enabled }}
       annotations:
+        # Ensures it gets redeployed when the configmap (actual keys) change https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments
+        checksum/config: {{ include (print $.Template.BasePath "/keys.yaml") . | sha256sum }}
+      {{- if .Values.verticalPodAutoscaler.enabled }}
         "kyverno.haff.xyz/ignore-require-requests-and-limits": "yes"
       {{- end }}
     spec:

@@ -18,5 +18,6 @@
   * `trivy` reporting
   * Reporting on failing kyverno policies?
 * Install glusterfs
-* See if I can force a redeploy for "keys" `configMap` changes
 * Use Apprise instead of gotify
+* Nicer kyverno annotations
+* I think chiv8 isn't working?
