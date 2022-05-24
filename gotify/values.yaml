@@ -22,11 +22,11 @@ defaultuser:
 
 resources:
   requests:
-    cpu: "15m"
-    memory: "20Mi"
+    cpu: ""
+    memory: ""
   limits:
-    cpu: "150m"
-    memory: "200Mi"
+    cpu: ""
+    memory: ""
 
 initContainer:
   digest: sha256:52f431d980baa76878329b68ddb69cb124c25efa6e206d8b0bd797a828f0528e
@@ -39,5 +39,5 @@ initContainer:
       memory: "10Mi"
 
 verticalPodAutoscaler:
-  enabled: false
+  enabled: true
   mode: "Auto"

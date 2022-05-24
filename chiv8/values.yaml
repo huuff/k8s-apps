@@ -1,14 +1,14 @@
 verticalPodAutoscaler:
-  enabled: false
+  enabled: true
   mode: "Auto"
 
 resources:
   requests:
-    cpu: "10m"
-    memory: "20Mi"
+    cpu: ""
+    memory: ""
   limits:
-    cpu: "10m"
-    memory: "20Mi"
+    cpu: ""
+    memory: ""
 
 
 digest: "sha256:81372de8c566f2d731bde924bed45230018e6d7c21d051c15e283eb8e06dfa2d"

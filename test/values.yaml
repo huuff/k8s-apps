@@ -2,17 +2,17 @@ digest: sha256:fee97924dbe2fb0d2338971505728cd20622bbb02ebe75c14942d9d06c7c0fd9
 
 resources:
   requests:
-    cpu: "15m"
-    memory: "30Mi"
+    cpu: ""
+    memory: ""
   limits:
-    cpu: "15m"
-    memory: "30Mi"
+    cpu: ""
+    memory: ""
 
 podDurationInSeconds: "3600"
 
-user: 1001
-group: 1001
+user: 8343
+group: 8343
 
 verticalPodAutoscaler:
-  enabled: false
+  enabled: true
   mode: "Auto"

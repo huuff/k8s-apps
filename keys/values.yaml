@@ -2,11 +2,11 @@ nginx:
   digest: sha256:efc09388b15fb423c402f0b8b28ca70c7fd20fe31f8d7531ae1896bbb4944999
   resources:
     requests:
-      cpu: "5m"
-      memory: "5Mi"
+      cpu: ""
+      memory: ""
     limits:
-      cpu: "25m"
-      memory: "25Mi"
+      cpu: ""
+      memory: ""
 
 
 indexer:
@@ -14,11 +14,11 @@ indexer:
   secondsBetweenRefreshes: 60
   resources:
     requests:
-      cpu: "5m"
-      memory: "5Mi"
+      cpu: ""
+      memory: ""
     limits:
-      cpu: "25m"
-      memory: "25Mi"
+      cpu: ""
+      memory: ""
 
 ingress:
   enabled: true
@@ -38,5 +38,5 @@ replicas: 1
 keys: {}
 
 verticalPodAutoscaler:
-  enabled: false
+  enabled: true
   mode: "Auto"

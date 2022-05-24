@@ -19,6 +19,5 @@
 * Install glusterfs
 * Use Apprise instead of gotify
 * Nicer kyverno annotations
-* Set my VPAs as default resources
 * Use version labels
 * Clean up `values.yaml`?
