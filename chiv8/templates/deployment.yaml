@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}
+        version: {{ .Chart.AppVersion }}
       {{- if .Values.verticalPodAutoscaler.enabled }}
       annotations:
         "kyverno.haff.xyz/ignore-require-requests-and-limits": "yes"

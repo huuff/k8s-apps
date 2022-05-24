@@ -19,5 +19,4 @@
 * Install glusterfs
 * Use Apprise instead of gotify
 * Nicer kyverno annotations
-* Use version labels
 * Clean up `values.yaml`?

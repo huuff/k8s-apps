@@ -17,6 +17,7 @@ spec:
       {{- end }}
       labels:
         app: {{ .Release.Name }}
+        version: {{ .Chart.AppVersion }}
     spec:
       initContainers: 
         - name: create-config

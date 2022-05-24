@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}
+        version: {{ .Chart.AppVersion }}
       annotations:
         "kyverno.haff.xyz/ignore-always-pull-images": "yes"
       {{- if .Values.verticalPodAutoscaler.enabled }}

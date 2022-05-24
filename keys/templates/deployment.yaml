@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}
+        version: {{ .Chart.AppVersion }}
       annotations:
         # Ensures it gets redeployed when the configmap (actual keys) change https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments
         checksum/config: {{ include (print $.Template.BasePath "/keys.yaml") . | sha256sum }}
