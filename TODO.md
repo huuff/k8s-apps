@@ -5,7 +5,6 @@
 * A controller that removes pods after some time specified by an annotation
 * Some AppArmor profiles... is there a `bane` controller?
 * (Emanote) Should allow specifying several repositories to create a layered zettelkasten
-* Some audit policy
 * A krew plugin that allows deploying a `pgcli` connection to a Zalando's postgres deployment?
 * Gotify:
   * mysql?
