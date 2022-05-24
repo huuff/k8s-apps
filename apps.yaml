@@ -59,6 +59,10 @@ releases:
         value: "password"
       - name: "verticalPodAutoscaler.enabled"
         value: "true"
+      - name: "database.pod.labelKey"
+        value: "app"
+      - name: "database.pod.labelValue"
+        value: "gotify-db"
   - name: chiv8
     namespace: default
     chart: ./chiv8

@@ -12,6 +12,9 @@ database:
     secretName: ""
     userKey: ""
     passwordKey: ""
+  pod:
+    labelKey: ""
+    labelValue: ""
 
 defaultuser:
   name: admin

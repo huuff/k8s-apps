@@ -1,0 +1,36 @@
+{{- if .Values.database.pod.labelKey }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}-db-ingress
+spec:
+  podSelector:
+    matchLabels:
+      {{ .Values.database.pod.labelKey }}: {{ .Values.database.pod.labelValue }}
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: {{ .Release.Name }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Release.Name }}-db-egress
+spec:
+  podSelector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              {{ .Values.database.pod.labelKey }}: {{ .Values.database.pod.labelValue }}
+      ports:
+        - port: {{ .Values.database.port }}
+          protocol: TCP
+{{- end }}
