@@ -18,4 +18,3 @@
   * Reporting on failing kyverno policies?
 * Install glusterfs
 * Use Apprise instead of gotify
-* Clean up `values.yaml`?
