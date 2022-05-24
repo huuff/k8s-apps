@@ -5,6 +5,9 @@ apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
   name: {{ $policyName }}
+  annotations:
+    "policies.kyverno.io/title": "Drop All Capabilities"
+    "policies.kyverno.io/description": You should drop all capabilities and then add only the required ones for your container to function.
 spec:
   validationFailureAction: {{ .Values.validationFailureAction }}
   rules:
@@ -16,8 +19,7 @@ spec:
                 - Pod
               namespaces: {{- toYaml .Values.namespaces | nindent 14 }}
       validate:
-        message: |
-          You should drop all capabilities and then add only the required ones for your container to function.
+        message: You should drop all capabilities and then add only the required ones for your container to function.
         pattern:
           metadata:
             <(annotations):

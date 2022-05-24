@@ -5,6 +5,10 @@ apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
   name: {{ $policyName }}
+  annotations:
+    "policies.kyverno.io/title": "Don't Use hostPath Volumes"
+    "policies.kyverno.io/description": |
+      A symlink in a `hostPath` volume to outside of it can give a compromised volume access to the host's root filesystem
 spec:
   validationFailureAction: {{ .Values.validationFailureAction }}
   rules:
@@ -16,9 +20,7 @@ spec:
                 - Pod
               namespaces: {{- toYaml .Values.namespaces | nindent 14 }}
       validate:
-        message: |
-          Don't use any `hostPath` volumes. 
-          A symlink in a `hostPath` volume to outside of it can give a compromised volume access to the host's root filesystem
+        message: Don't use any `hostPath` volumes. 
         pattern:
           metadata:
             <(annotations):

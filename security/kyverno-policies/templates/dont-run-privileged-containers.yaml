@@ -5,6 +5,10 @@ apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
   name: {{ $policyName }}
+  annotations:
+    "policies.kyverno.io/title": "Don't Run Privileged Containers"
+    "policies.kyverno.io/description": |
+      This gives full privileges and capabilities over the host to the pod. This makes a compromise of the pod incredibly dangerous for the host
 spec:
   validationFailureAction: {{ .Values.validationFailureAction }}
   rules:
@@ -16,9 +20,7 @@ spec:
                 - Pod
               namespaces: {{- toYaml .Values.namespaces | nindent 14 }}
       validate:
-        message: |
-          `securityContext.privileged` should be `false`
-          This gives full privileges and capabilities over the host to the pod. This makes a compromise of the pod incredibly dangerous for the host
+        message: "`securityContext.privileged` should be `false`"
         pattern:
           metadata:
             <(annotations):

@@ -5,6 +5,10 @@ apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
   name: {{ $policyName }}
+  annotations:
+    "policies.kyverno.io/title": "Don't Run As Root"
+    "policies.kyverno.io/description": |
+      Since the user namespace is shared with the host, without this setting, an intruder is only one container escape vulnerability from gaining full superuser control on the node.
 spec:
   validationFailureAction: {{ .Values.validationFailureAction }}
   rules:
@@ -16,9 +20,7 @@ spec:
                 - Pod
               namespaces: {{- toYaml .Values.namespaces | nindent 14 }}
       validate:
-        message: |
-          `runAsNonRoot` should be `true`.
-          Since the user namespace is shared with the host, without this setting, an intruder is only one container escape vulnerability from gaining full superuser control on the node.
+        message: "`runAsNonRoot` should be `true`."
         pattern:
           metadata:
             <(annotations):
