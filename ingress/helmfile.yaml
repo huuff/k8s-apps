@@ -13,5 +13,14 @@ releases:
   - name: cert-manager
     namespace: cert-manager
     chart: jetstack/cert-manager
+    set:
+      - name: "installCRDs"
+        value: true
+  - name: letsencrypt
+    namespace: default
+    chart: ./letsencrypt
+    set:
+      - name: email
+        value: "haf@protonmail.ch"
 
 
