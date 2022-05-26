@@ -1,9 +1,0 @@
-configKubernetes:
-  inherited_labels:
-    - app
-  custom_pod_annotations:
-    # The operator needs privilege escalation for scheduled tasks such as backups
-    "kyverno.haff.xyz/ignore-dont-allow-privilege-escalation": "yes"
-    # Doesn't matter since it gets images from the official, public zalando registry
-    "kyverno.haff.xyz/ignore-always-pull-images": "yes"
-   
